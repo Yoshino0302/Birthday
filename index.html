@@ -3,91 +3,141 @@
 <head>
 <meta charset="UTF-8">
 <title>Happy Birthday Bé iu 💖</title>
+
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',sans-serif}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
 body{
   background:linear-gradient(180deg,#ff6a8b,#ffd1dc);
-  overflow-x:hidden;
-  color:#333;
+  overflow:hidden;
 }
 
-/* ===== FIREWORK CANVAS ===== */
-#fireworks{
+/* ================= LOCK SCREEN ================= */
+#lockScreen{
   position:fixed;
   inset:0;
-  z-index:0;
-  pointer-events:none;
+  background:linear-gradient(180deg,#ff5f87,#ff9db8);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:999;
 }
 
-/* ===== HEADER ===== */
-header{
-  position:relative;
-  z-index:5;
-  padding:40px 0 50px;
+.lock-box{
+  background:#fff;
+  padding:35px;
+  width:300px;
+  border-radius:25px;
+  text-align:center;
+  box-shadow:0 30px 60px rgba(0,0,0,.35);
+  animation:pop .8s ease;
+}
+@keyframes pop{from{transform:scale(.6)}to{transform:scale(1)}}
+
+.lock-box h2{color:#ff4f86;margin-bottom:20px}
+
+.lock-box input{
+  width:100%;
+  padding:12px;
+  border-radius:12px;
+  border:2px solid #ffd1dc;
+  outline:none;
+  font-size:18px;
   text-align:center;
 }
-
-.banner{
-  position:relative;
-  display:inline-block;
-  padding:20px 90px;
-  background:linear-gradient(90deg,#ff5f87,#ff8fb3);
-  border-radius:50px;
-  box-shadow:0 15px 40px rgba(255,0,100,.35);
-}
-
-.ribbon{
-  position:absolute;
-  top:50%;
-  width:90px;
-  height:40px;
-  background:linear-gradient(180deg,#ffd6e3,#ff9ebb);
-  transform:translateY(-50%);
-}
-.ribbon.left{
-  left:-90px;
-  border-radius:40px 0 0 40px;
-}
-.ribbon.right{
-  right:-90px;
-  border-radius:0 40px 40px 0;
-}
-
-.banner h1{
-  font-size:30px;
+.lock-box button{
+  margin-top:15px;
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:15px;
+  background:#ff5f87;
   color:#fff;
-  text-shadow:
-    0 0 6px #fff,
-    0 0 15px #ffb3c8,
-    0 0 30px #ff3f7f;
+  font-size:16px;
+  cursor:pointer;
 }
 
-/* ===== HEART FLOAT ===== */
-.heart{
+.shake{
+  animation:shake .4s;
+  border-color:#ff0000!important;
+}
+@keyframes shake{
+  0%,100%{transform:translateX(0)}
+  25%{transform:translateX(-6px)}
+  75%{transform:translateX(6px)}
+}
+
+/* ================= GIFT ================= */
+#giftScreen{
+  position:fixed;
+  inset:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:rgba(255,255,255,.4);
+  backdrop-filter:blur(8px);
+  z-index:998;
+  display:none;
+}
+
+.gift{
+  width:140px;
+  height:120px;
+  background:#ff5f87;
+  border-radius:15px;
+  position:relative;
+  cursor:pointer;
+  animation:bounce 1.5s infinite;
+}
+@keyframes bounce{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-15px)}
+}
+.gift::before{
+  content:'';
+  position:absolute;
+  top:-25px;
+  left:0;
+  width:100%;
+  height:30px;
+  background:#ff7fa2;
+  border-radius:15px;
+  transition:.6s;
+}
+.open .gift::before{
+  transform:rotateX(120deg) translateY(-20px);
+}
+
+.spark{
   position:absolute;
   color:#ff3f7f;
-  animation:float 6s linear infinite;
+  animation:spark 2s forwards;
 }
-@keyframes float{
-  from{transform:translateY(0);opacity:1}
-  to{transform:translateY(-120px);opacity:0}
+@keyframes spark{
+  to{transform:translateY(-120px) scale(0);opacity:0}
 }
 
-/* ===== MAIN ===== */
-main{
-  position:relative;
-  z-index:2;
-  padding:80px 0;
+/* ================= MAIN CONTENT ================= */
+#main{
+  display:none;
+  height:100vh;
+  overflow:auto;
+}
+
+header{
+  text-align:center;
+  padding:35px;
+  color:#fff;
+  font-size:28px;
+  text-shadow:0 0 10px #fff,0 0 30px #ff3f7f;
 }
 
 .layout{
   display:flex;
   justify-content:center;
-  align-items:center;
   gap:60px;
+  padding:40px;
 }
 
-/* ===== IMAGES ===== */
 .column{
   display:flex;
   flex-direction:column;
@@ -98,62 +148,48 @@ main{
   height:230px;
   object-fit:cover;
   border-radius:22px;
-  box-shadow:0 12px 30px rgba(0,0,0,.25);
+  box-shadow:0 15px 30px rgba(0,0,0,.3);
 }
 
-/* ===== CARD ===== */
 .card{
   width:380px;
   background:#fff;
   padding:30px;
   border-radius:22px;
   text-align:center;
-  box-shadow:0 25px 60px rgba(0,0,0,.25);
+  box-shadow:0 30px 60px rgba(0,0,0,.3);
 }
-.card h2{
-  color:#ff4f86;
-  margin-bottom:15px;
-}
-.card p{
-  font-size:15px;
-  line-height:1.7;
-}
-
-/* ===== HEART DECOR ===== */
-.flying-hearts span{
-  position:absolute;
-  font-size:16px;
-  animation:rise 7s linear infinite;
-}
-@keyframes rise{
-  from{transform:translateY(0);opacity:1}
-  to{transform:translateY(-200px);opacity:0}
-}
+.card h2{color:#ff4f86;margin-bottom:15px}
+.card p{line-height:1.7}
 </style>
 </head>
 
 <body>
 
-<canvas id="fireworks"></canvas>
-
-<header>
-  <div class="banner" id="banner">
-    <div class="ribbon left"></div>
-    <div class="ribbon right"></div>
-    <h1>❤️ Happy Birthday Bé iu ❤️</h1>
+<!-- 🔐 LOCK -->
+<div id="lockScreen">
+  <div class="lock-box">
+    <h2>🔐 Nhập mật khẩu</h2>
+    <input id="pass" type="password" placeholder="••••">
+    <button onclick="checkPass()">Mở khóa 🎁</button>
   </div>
-</header>
+</div>
 
-<main>
+<!-- 🎁 GIFT -->
+<div id="giftScreen">
+  <div class="gift" onclick="openGift()"></div>
+</div>
+
+<!-- 💖 MAIN -->
+<div id="main">
+  <header>❤️ Happy Birthday Bé iu ❤️</header>
+
   <div class="layout">
-
-    <!-- LEFT -->
     <div class="column">
       <img src="189eba2b-739c-4f82-8ea3-9194b14b9179.jfif">
       <img src="2ed21c0b-e1d3-453b-b756-dcd542fea547.jfif">
     </div>
 
-    <!-- CENTER -->
     <div class="card">
       <h2>Gửi Bé iu 💖</h2>
       <p>
@@ -164,63 +200,44 @@ main{
       </p>
     </div>
 
-    <!-- RIGHT -->
     <div class="column">
       <img src="415e4240-2d65-4a22-b29e-b82f6db391f0.jfif">
       <img src="cbb9b857-25ea-4678-a2ce-e0a156cad680.jfif">
     </div>
-
   </div>
-</main>
+</div>
 
 <script>
-/* ===== HEART EXPLOSION ON BANNER ===== */
-document.getElementById('banner').onclick = e=>{
-  for(let i=0;i<20;i++){
-    const h=document.createElement('div');
-    h.innerText='💖';
-    h.className='heart';
-    h.style.left=e.clientX+'px';
-    h.style.top=e.clientY+'px';
-    h.style.fontSize=12+Math.random()*18+'px';
-    h.style.animationDuration=3+Math.random()*3+'s';
-    document.body.appendChild(h);
-    setTimeout(()=>h.remove(),6000);
+const PASS="0502";
+
+function checkPass(){
+  const input=document.getElementById('pass');
+  if(input.value===PASS){
+    document.getElementById('lockScreen').style.display='none';
+    document.getElementById('giftScreen').style.display='flex';
+  }else{
+    input.classList.add('shake');
+    setTimeout(()=>input.classList.remove('shake'),400);
   }
 }
 
-/* ===== FIREWORKS ===== */
-const canvas=document.getElementById('fireworks');
-const ctx=canvas.getContext('2d');
-resize();
-window.onresize=resize;
-
-function resize(){
-  canvas.width=innerWidth;
-  canvas.height=innerHeight;
+function openGift(){
+  const gift=document.querySelector('.gift');
+  gift.classList.add('open');
+  for(let i=0;i<15;i++){
+    const s=document.createElement('div');
+    s.className='spark';
+    s.innerText='💖';
+    s.style.left=50+Math.random()*40+'px';
+    s.style.top=50+Math.random()*40+'px';
+    document.getElementById('giftScreen').appendChild(s);
+    setTimeout(()=>s.remove(),2000);
+  }
+  setTimeout(()=>{
+    document.getElementById('giftScreen').style.display='none';
+    document.getElementById('main').style.display='block';
+  },1200);
 }
-
-let fireworks=[];
-function Firework(){
-  this.x=Math.random()*canvas.width;
-  this.y=Math.random()*canvas.height/2;
-  this.r=0;
-  this.color=`hsl(${Math.random()*360},100%,70%)`;
-}
-function animate(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  if(Math.random()<0.05)fireworks.push(new Firework());
-  fireworks.forEach((f,i)=>{
-    ctx.beginPath();
-    ctx.arc(f.x,f.y,f.r,0,Math.PI*2);
-    ctx.fillStyle=f.color;
-    ctx.fill();
-    f.r+=2;
-    if(f.r>40)fireworks.splice(i,1);
-  });
-  requestAnimationFrame(animate);
-}
-animate();
 </script>
 
 </body>
