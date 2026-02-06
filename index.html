@@ -1,22 +1,17 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8" />
-<title>Happy Birthday Bé Iu 🎂</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<title>Happy Birthday Bé Iu ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-:root{
-  --pink1:#ff4d6d;
-  --pink2:#ff85a2;
-  --glow:#ffd1dc;
-}
-
-/* ===== BODY ===== */
+/* ===== RESET ===== */
+*{box-sizing:border-box}
 body{
   margin:0;
   font-family:"Segoe UI",sans-serif;
-  background:linear-gradient(#ffd6e0,#ffeef3);
+  background:linear-gradient(#ffe3ec,#fff1f6);
   overflow-x:hidden;
 }
 
@@ -24,8 +19,8 @@ body{
 .birthday-banner{
   position:fixed;
   top:0; left:0; right:0;
-  height:120px;
-  background:linear-gradient(90deg,var(--pink1),var(--pink2));
+  height:140px;
+  background:linear-gradient(90deg,#ff4d6d,#ff85a2);
   display:flex;
   align-items:center;
   justify-content:center;
@@ -34,15 +29,17 @@ body{
   overflow:hidden;
 }
 
-/* tránh che nội dung */
-.banner-spacer{height:130px}
+/* chừa chỗ cho nội dung */
+.banner-spacer{
+  height:140px;
+}
 
 /* dây treo */
 .rope{
   position:absolute;
   top:-20px;
   width:4px;
-  height:70px;
+  height:80px;
   background:white;
   opacity:.8;
 }
@@ -54,7 +51,7 @@ body{
   display:flex;
   align-items:center;
   gap:16px;
-  padding:18px 32px;
+  padding:18px 36px;
   border-radius:999px;
   background:rgba(255,255,255,.18);
   backdrop-filter:blur(6px);
@@ -66,7 +63,7 @@ body{
   font-size:34px;
   color:white;
   letter-spacing:1px;
-  text-shadow:0 0 12px var(--glow),0 8px 20px rgba(0,0,0,.4);
+  text-shadow:0 0 12px #ffd1dc,0 8px 20px rgba(0,0,0,.4);
 }
 
 .heart{
@@ -74,27 +71,16 @@ body{
   animation:beat 1.2s infinite;
 }
 
-/* ===== NHẤP NHÁY THEO NHẠC ===== */
-.music-glow{
-  animation:musicGlow .35s infinite alternate;
-}
-
-@keyframes musicGlow{
-  from{box-shadow:0 0 15px #fff}
-  to{box-shadow:0 0 40px #fff,0 0 70px #ffb3c6}
-}
-
-/* ===== BÓNG BAY ===== */
+/* bóng bay */
 .balloon{
   position:absolute;
-  bottom:-60px;
+  bottom:-50px;
   width:70px;
   height:90px;
   background:radial-gradient(circle at 30% 30%,#fff,#ff6f91);
-  border-radius:50% 50% 50% 50%;
+  border-radius:50%;
   animation:floatUp 6s ease-in-out infinite;
 }
-
 .balloon::after{
   content:"";
   position:absolute;
@@ -104,11 +90,10 @@ body{
   height:40px;
   background:white;
 }
-
 .balloon.left{left:30px}
 .balloon.right{right:30px;animation-delay:1s}
 
-/* ===== CONFETTI TIM ===== */
+/* tim bay */
 .sparkles{
   position:absolute;
   inset:0;
@@ -126,7 +111,34 @@ body{
   animation:floatDown 6s linear infinite;
 }
 
-/* ===== KEYFRAMES ===== */
+/* ===== CONTENT ===== */
+.content{
+  padding:40px 20px;
+  text-align:center;
+  animation:fadeUp .8s ease;
+}
+
+.card{
+  max-width:520px;
+  margin:0 auto;
+  background:white;
+  padding:28px;
+  border-radius:24px;
+  box-shadow:0 20px 40px rgba(0,0,0,.15);
+}
+
+.card h2{
+  margin-top:0;
+  color:#ff4d6d;
+}
+
+.card p{
+  font-size:18px;
+  line-height:1.6;
+  color:#555;
+}
+
+/* ===== ANIMATION ===== */
 @keyframes swing{
   0%,100%{transform:rotate(0deg)}
   50%{transform:rotate(1.5deg)}
@@ -137,40 +149,30 @@ body{
 }
 @keyframes floatDown{
   from{transform:translateY(0)}
-  to{transform:translateY(130px)}
+  to{transform:translateY(140px)}
 }
 @keyframes floatUp{
   0%,100%{transform:translateY(0)}
   50%{transform:translateY(-20px)}
 }
-
-/* ===== NÚT NHẠC ===== */
-.music-btn{
-  margin:30px auto;
-  display:block;
-  padding:14px 26px;
-  border:none;
-  border-radius:999px;
-  background:#ff4d6d;
-  color:white;
-  font-size:18px;
-  cursor:pointer;
-  box-shadow:0 8px 20px rgba(0,0,0,.3);
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(30px)}
+  to{opacity:1;transform:translateY(0)}
 }
-.music-btn:hover{background:#ff2f5e}
 </style>
 </head>
 
 <body>
 
-<header class="birthday-banner" id="banner">
+<!-- ===== BANNER ===== -->
+<header class="birthday-banner">
   <div class="rope left"></div>
   <div class="rope right"></div>
 
   <div class="balloon left"></div>
   <div class="balloon right"></div>
 
-  <div class="banner-core" id="bannerCore">
+  <div class="banner-core">
     <span class="heart">❤️</span>
     <h1>Happy Birthday Bé Iu</h1>
     <span class="heart">❤️</span>
@@ -181,27 +183,16 @@ body{
 
 <div class="banner-spacer"></div>
 
-<button class="music-btn" onclick="toggleMusic()">🎵 Bật / Tắt nhạc</button>
-
-<audio id="music" loop>
-  <!-- thay link nhạc nếu muốn -->
-  <source src="https://cdn.pixabay.com/audio/2022/10/30/audio_1c8b1c0b9a.mp3" type="audio/mpeg">
-</audio>
-
-<script>
-const music=document.getElementById("music");
-const banner=document.getElementById("banner");
-
-function toggleMusic(){
-  if(music.paused){
-    music.play();
-    banner.classList.add("music-glow");
-  }else{
-    music.pause();
-    banner.classList.remove("music-glow");
-  }
-}
-</script>
+<!-- ===== CONTENT ===== -->
+<section class="content">
+  <div class="card">
+    <h2>Gửi Bé Iu 💖</h2>
+    <p>
+      Chúc bé luôn vui vẻ, xinh đẹp và hạnh phúc mỗi ngày.<br>
+      Mong rằng sinh nhật này sẽ thật đặc biệt và đầy ắp yêu thương 🥰
+    </p>
+  </div>
+</section>
 
 </body>
 </html>
