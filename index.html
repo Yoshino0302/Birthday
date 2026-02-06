@@ -6,7 +6,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-/* ===== RESET ===== */
 *{box-sizing:border-box}
 body{
   margin:0;
@@ -18,7 +17,7 @@ body{
 /* ===== BANNER ===== */
 .birthday-banner{
   position:fixed;
-  top:0; left:0; right:0;
+  top:0;left:0;right:0;
   height:140px;
   background:linear-gradient(90deg,#ff4d6d,#ff85a2);
   display:flex;
@@ -29,24 +28,17 @@ body{
   overflow:hidden;
 }
 
-/* chừa chỗ cho nội dung */
-.banner-spacer{
-  height:140px;
-}
+.banner-spacer{height:140px}
 
-/* dây treo */
 .rope{
   position:absolute;
   top:-20px;
-  width:4px;
-  height:80px;
-  background:white;
-  opacity:.8;
+  width:4px;height:80px;
+  background:white;opacity:.8;
 }
 .rope.left{left:18%}
 .rope.right{right:18%}
 
-/* lõi banner */
 .banner-core{
   display:flex;
   align-items:center;
@@ -62,7 +54,6 @@ body{
   margin:0;
   font-size:34px;
   color:white;
-  letter-spacing:1px;
   text-shadow:0 0 12px #ffd1dc,0 8px 20px rgba(0,0,0,.4);
 }
 
@@ -71,12 +62,10 @@ body{
   animation:beat 1.2s infinite;
 }
 
-/* bóng bay */
 .balloon{
   position:absolute;
   bottom:-50px;
-  width:70px;
-  height:90px;
+  width:70px;height:90px;
   background:radial-gradient(circle at 30% 30%,#fff,#ff6f91);
   border-radius:50%;
   animation:floatUp 6s ease-in-out infinite;
@@ -84,35 +73,77 @@ body{
 .balloon::after{
   content:"";
   position:absolute;
-  bottom:-40px;
-  left:50%;
-  width:2px;
-  height:40px;
+  bottom:-40px;left:50%;
+  width:2px;height:40px;
   background:white;
 }
 .balloon.left{left:30px}
 .balloon.right{right:30px;animation-delay:1s}
 
-/* tim bay */
 .sparkles{
-  position:absolute;
-  inset:0;
+  position:absolute;inset:0;
   pointer-events:none;
 }
 .sparkles::before{
   content:"❤️ 💖 💕 💘 💝 💗";
   position:absolute;
   width:120%;
-  top:10px;
-  left:-10%;
+  top:10px;left:-10%;
   text-align:center;
   font-size:18px;
   opacity:.5;
   animation:floatDown 6s linear infinite;
 }
 
+/* ===== LOCK SCREEN ===== */
+.lock{
+  text-align:center;
+  padding:60px 20px;
+}
+
+.lock-box{
+  max-width:360px;
+  margin:0 auto;
+  background:white;
+  padding:30px;
+  border-radius:24px;
+  box-shadow:0 20px 40px rgba(0,0,0,.2);
+}
+
+.lock-box h2{color:#ff4d6d}
+
+.lock-box input{
+  width:100%;
+  padding:14px;
+  font-size:16px;
+  border-radius:999px;
+  border:1px solid #ddd;
+  text-align:center;
+  margin:16px 0;
+}
+
+.lock-box button{
+  padding:14px 30px;
+  border:none;
+  border-radius:999px;
+  background:#ff4d6d;
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+  box-shadow:0 8px 20px rgba(0,0,0,.3);
+}
+
+.lock-box button:hover{background:#ff2f5e}
+
+.error{
+  color:red;
+  margin-top:10px;
+  display:none;
+}
+
 /* ===== CONTENT ===== */
 .content{
+  display:none;
   padding:40px 20px;
   text-align:center;
   animation:fadeUp .8s ease;
@@ -140,7 +171,7 @@ body{
 
 /* ===== ANIMATION ===== */
 @keyframes swing{
-  0%,100%{transform:rotate(0deg)}
+  0%,100%{transform:rotate(0)}
   50%{transform:rotate(1.5deg)}
 }
 @keyframes beat{
@@ -183,8 +214,19 @@ body{
 
 <div class="banner-spacer"></div>
 
+<!-- ===== LOCK ===== -->
+<section class="lock" id="lock">
+  <div class="lock-box">
+    <h2>🔒 Nhập mật khẩu</h2>
+    <p>Chỉ Bé Iu mới mở được 💖</p>
+    <input type="password" id="password" placeholder="Nhập mật khẩu">
+    <button onclick="unlock()">Mở khóa 💝</button>
+    <div class="error" id="error">Sai mật khẩu rồi 😢</div>
+  </div>
+</section>
+
 <!-- ===== CONTENT ===== -->
-<section class="content">
+<section class="content" id="content">
   <div class="card">
     <h2>Gửi Bé Iu 💖</h2>
     <p>
@@ -193,6 +235,21 @@ body{
     </p>
   </div>
 </section>
+
+<script>
+const PASSWORD = "0502"; // đổi nếu muốn
+
+function unlock(){
+  const input=document.getElementById("password").value;
+  const error=document.getElementById("error");
+  if(input===PASSWORD){
+    document.getElementById("lock").style.display="none";
+    document.getElementById("content").style.display="block";
+  }else{
+    error.style.display="block";
+  }
+}
+</script>
 
 </body>
 </html>
