@@ -2,253 +2,261 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>Happy Birthday Bé Iu ❤️</title>
+<title>Happy Birthday Bé lu ❤️</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-*{box-sizing:border-box}
+*{
+  margin:0; padding:0;
+  box-sizing:border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
 body{
-  margin:0;
-  font-family:"Segoe UI",sans-serif;
-  background:linear-gradient(#ffe3ec,#fff1f6);
+  background: linear-gradient(180deg,#ff6b8a,#ffe6ee);
+  min-height:100vh;
   overflow-x:hidden;
 }
 
 /* ===== BANNER ===== */
-.birthday-banner{
-  position:fixed;
-  top:0;left:0;right:0;
-  height:140px;
-  background:linear-gradient(90deg,#ff4d6d,#ff85a2);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  box-shadow:0 12px 30px rgba(0,0,0,.35);
-  z-index:1000;
-  overflow:hidden;
-}
-
-.banner-spacer{height:140px}
-
-.rope{
-  position:absolute;
-  top:-20px;
-  width:4px;height:80px;
-  background:white;opacity:.8;
-}
-.rope.left{left:18%}
-.rope.right{right:18%}
-
-.banner-core{
-  display:flex;
-  align-items:center;
-  gap:16px;
-  padding:18px 36px;
-  border-radius:999px;
-  background:rgba(255,255,255,.18);
-  backdrop-filter:blur(6px);
-  animation:swing 3s ease-in-out infinite;
-}
-
-.banner-core h1{
-  margin:0;
-  font-size:34px;
-  color:white;
-  text-shadow:0 0 12px #ffd1dc,0 8px 20px rgba(0,0,0,.4);
-}
-
-.heart{
-  font-size:30px;
-  animation:beat 1.2s infinite;
-}
-
-.balloon{
-  position:absolute;
-  bottom:-50px;
-  width:70px;height:90px;
-  background:radial-gradient(circle at 30% 30%,#fff,#ff6f91);
-  border-radius:50%;
-  animation:floatUp 6s ease-in-out infinite;
-}
-.balloon::after{
-  content:"";
-  position:absolute;
-  bottom:-40px;left:50%;
-  width:2px;height:40px;
-  background:white;
-}
-.balloon.left{left:30px}
-.balloon.right{right:30px;animation-delay:1s}
-
-.sparkles{
-  position:absolute;inset:0;
-  pointer-events:none;
-}
-.sparkles::before{
-  content:"❤️ 💖 💕 💘 💝 💗";
-  position:absolute;
-  width:120%;
-  top:10px;left:-10%;
+.banner{
+  position:relative;
+  padding:25px;
   text-align:center;
-  font-size:18px;
-  opacity:.5;
-  animation:floatDown 6s linear infinite;
+  color:white;
+  font-size:32px;
+  font-weight:700;
+  background:linear-gradient(90deg,#ff4d6d,#ff85a1);
+  box-shadow:0 8px 25px rgba(0,0,0,.25);
+  animation:pulse 2s infinite;
+}
+@keyframes pulse{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.03)}
 }
 
 /* ===== LOCK SCREEN ===== */
-.lock{
-  text-align:center;
-  padding:60px 20px;
+#lock{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.55);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:10;
 }
 
 .lock-box{
-  max-width:360px;
-  margin:0 auto;
   background:white;
   padding:30px;
-  border-radius:24px;
-  box-shadow:0 20px 40px rgba(0,0,0,.2);
+  border-radius:20px;
+  text-align:center;
+  width:300px;
+  animation:pop .6s ease;
+}
+@keyframes pop{
+  from{transform:scale(.7);opacity:0}
+  to{transform:scale(1);opacity:1}
 }
 
-.lock-box h2{color:#ff4d6d}
+.lock-box h2{
+  color:#ff4d6d;
+  margin-bottom:15px;
+}
 
 .lock-box input{
   width:100%;
-  padding:14px;
-  font-size:16px;
-  border-radius:999px;
-  border:1px solid #ddd;
+  padding:12px;
+  border-radius:12px;
+  border:1px solid #ccc;
+  margin-bottom:15px;
   text-align:center;
-  margin:16px 0;
+  font-size:18px;
 }
 
 .lock-box button{
-  padding:14px 30px;
-  border:none;
-  border-radius:999px;
   background:#ff4d6d;
+  border:none;
+  padding:12px 25px;
+  border-radius:20px;
   color:white;
   font-size:16px;
   cursor:pointer;
-  box-shadow:0 8px 20px rgba(0,0,0,.3);
 }
 
-.lock-box button:hover{background:#ff2f5e}
-
-.error{
-  color:red;
-  margin-top:10px;
+/* ===== GIFT ===== */
+#gift{
   display:none;
+  text-align:center;
+  margin-top:40px;
+}
+
+.box{
+  width:150px;
+  height:150px;
+  margin:0 auto;
+  background:#ff4d6d;
+  border-radius:20px;
+  position:relative;
+  cursor:pointer;
+  animation:shake 1.5s infinite;
+}
+
+.box::before{
+  content:"";
+  position:absolute;
+  width:100%;
+  height:20px;
+  background:#ffd1dc;
+  top:60px;
+}
+
+@keyframes shake{
+  0%,100%{transform:rotate(0)}
+  25%{transform:rotate(3deg)}
+  75%{transform:rotate(-3deg)}
 }
 
 /* ===== CONTENT ===== */
-.content{
+#content{
   display:none;
   padding:40px 20px;
   text-align:center;
-  animation:fadeUp .8s ease;
 }
 
 .card{
-  max-width:520px;
-  margin:0 auto;
   background:white;
-  padding:28px;
-  border-radius:24px;
-  box-shadow:0 20px 40px rgba(0,0,0,.15);
+  max-width:400px;
+  margin:0 auto;
+  padding:25px;
+  border-radius:25px;
+  box-shadow:0 15px 40px rgba(0,0,0,.25);
 }
 
 .card h2{
-  margin-top:0;
   color:#ff4d6d;
+  margin-bottom:15px;
 }
 
-.card p{
-  font-size:18px;
-  line-height:1.6;
-  color:#555;
+/* ===== GALLERY ===== */
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:15px;
+  margin-top:30px;
 }
 
-/* ===== ANIMATION ===== */
-@keyframes swing{
-  0%,100%{transform:rotate(0)}
-  50%{transform:rotate(1.5deg)}
+.gallery img{
+  width:100%;
+  border-radius:20px;
+  box-shadow:0 10px 25px rgba(0,0,0,.3);
+  transition:.3s;
 }
-@keyframes beat{
-  0%,100%{transform:scale(1)}
-  50%{transform:scale(1.2)}
+.gallery img:hover{
+  transform:scale(1.05);
 }
-@keyframes floatDown{
-  from{transform:translateY(0)}
-  to{transform:translateY(140px)}
-}
-@keyframes floatUp{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-20px)}
-}
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(30px)}
-  to{opacity:1;transform:translateY(0)}
+
+/* ===== FIREWORK ===== */
+canvas{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:-1;
 }
 </style>
 </head>
 
 <body>
 
-<!-- ===== BANNER ===== -->
-<header class="birthday-banner">
-  <div class="rope left"></div>
-  <div class="rope right"></div>
+<div class="banner">❤️ Happy Birthday Bé lu ❤️</div>
 
-  <div class="balloon left"></div>
-  <div class="balloon right"></div>
-
-  <div class="banner-core">
-    <span class="heart">❤️</span>
-    <h1>Happy Birthday Bé Iu</h1>
-    <span class="heart">❤️</span>
-  </div>
-
-  <div class="sparkles"></div>
-</header>
-
-<div class="banner-spacer"></div>
-
-<!-- ===== LOCK ===== -->
-<section class="lock" id="lock">
+<!-- LOCK -->
+<div id="lock">
   <div class="lock-box">
     <h2>🔒 Nhập mật khẩu</h2>
-    <p>Chỉ Bé Iu mới mở được 💖</p>
-    <input type="password" id="password" placeholder="Nhập mật khẩu">
-    <button onclick="unlock()">Mở khóa 💝</button>
-    <div class="error" id="error">Sai mật khẩu rồi 😢</div>
+    <input type="password" id="pass" placeholder="••••">
+    <button onclick="unlock()">Mở khóa</button>
   </div>
-</section>
+</div>
 
-<!-- ===== CONTENT ===== -->
-<section class="content" id="content">
+<!-- GIFT -->
+<div id="gift">
+  <h2 style="color:white;margin-bottom:20px;">🎁 Chạm để mở quà 🎁</h2>
+  <div class="box" onclick="openGift()"></div>
+</div>
+
+<!-- CONTENT -->
+<div id="content">
   <div class="card">
-    <h2>Gửi Bé Iu 💖</h2>
+    <h2>Gửi Bé lu 💖</h2>
     <p>
       Chúc bé luôn vui vẻ, xinh đẹp và hạnh phúc mỗi ngày.<br>
-      Mong rằng sinh nhật này sẽ thật đặc biệt và đầy ắp yêu thương 🥰
+      Mong sinh nhật này thật đặc biệt và tràn đầy yêu thương 🥰
     </p>
+
+    <div class="gallery">
+      <img src="img1.jpg">
+      <img src="img2.jpg">
+      <img src="img3.jpg">
+      <img src="img4.jpg">
+    </div>
   </div>
-</section>
+</div>
+
+<canvas id="firework"></canvas>
 
 <script>
-const PASSWORD = "0502"; // đổi nếu muốn
-
+/* ===== PASSWORD ===== */
 function unlock(){
-  const input=document.getElementById("password").value;
-  const error=document.getElementById("error");
-  if(input===PASSWORD){
+  const p = document.getElementById("pass").value;
+  if(p==="0502"){
     document.getElementById("lock").style.display="none";
-    document.getElementById("content").style.display="block";
+    document.getElementById("gift").style.display="block";
   }else{
-    error.style.display="block";
+    alert("Sai mật khẩu rồi 😝");
   }
 }
+
+/* ===== OPEN GIFT ===== */
+function openGift(){
+  document.getElementById("gift").style.display="none";
+  document.getElementById("content").style.display="block";
+  startFirework();
+}
+
+/* ===== FIREWORK ===== */
+const canvas=document.getElementById("firework");
+const ctx=canvas.getContext("2d");
+canvas.width=innerWidth;
+canvas.height=innerHeight;
+
+let fireworks=[];
+
+function startFirework(){
+  setInterval(()=>{
+    fireworks.push({
+      x:Math.random()*canvas.width,
+      y:Math.random()*canvas.height/2,
+      r:0,
+      a:1
+    });
+  },300);
+}
+
+function draw(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  fireworks.forEach((f,i)=>{
+    f.r+=2;
+    f.a-=0.02;
+    ctx.beginPath();
+    ctx.arc(f.x,f.y,f.r,0,Math.PI*2);
+    ctx.strokeStyle=`rgba(255,100,150,${f.a})`;
+    ctx.stroke();
+    if(f.a<=0) fireworks.splice(i,1);
+  });
+  requestAnimationFrame(draw);
+}
+draw();
 </script>
 
 </body>
