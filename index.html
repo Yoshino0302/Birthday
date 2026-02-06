@@ -2,166 +2,139 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>Happy Birthday Bé lu ❤️</title>
+<title>Happy Birthday Bé lu 💖</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-*{
-  margin:0; padding:0;
-  box-sizing:border-box;
-  font-family: 'Segoe UI', sans-serif;
-}
-
+*{box-sizing:border-box;font-family:'Segoe UI',sans-serif}
 body{
-  background: linear-gradient(180deg,#ff6b8a,#ffe6ee);
+  margin:0;
+  background:linear-gradient(180deg,#ff6f91,#ffd1dc);
   min-height:100vh;
   overflow-x:hidden;
 }
 
 /* ===== BANNER ===== */
 .banner{
-  position:relative;
-  padding:25px;
-  text-align:center;
+  background:#ff5c8a;
   color:white;
+  text-align:center;
+  padding:30px;
   font-size:32px;
-  font-weight:700;
-  background:linear-gradient(90deg,#ff4d6d,#ff85a1);
-  box-shadow:0 8px 25px rgba(0,0,0,.25);
-  animation:pulse 2s infinite;
+  font-weight:800;
+  animation:glow 2s infinite alternate;
 }
-@keyframes pulse{
-  0%,100%{transform:scale(1)}
-  50%{transform:scale(1.03)}
+@keyframes glow{
+  from{box-shadow:0 0 10px #fff}
+  to{box-shadow:0 0 30px #fff}
 }
 
-/* ===== LOCK SCREEN ===== */
-#lock{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.55);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  z-index:10;
-}
-
+/* ===== LOCK ===== */
 .lock-box{
+  margin:60px auto;
+  width:320px;
   background:white;
   padding:30px;
   border-radius:20px;
   text-align:center;
-  width:300px;
-  animation:pop .6s ease;
+  box-shadow:0 20px 50px rgba(0,0,0,.25);
 }
-@keyframes pop{
-  from{transform:scale(.7);opacity:0}
-  to{transform:scale(1);opacity:1}
-}
-
-.lock-box h2{
-  color:#ff4d6d;
-  margin-bottom:15px;
-}
-
 .lock-box input{
   width:100%;
   padding:12px;
-  border-radius:12px;
-  border:1px solid #ccc;
-  margin-bottom:15px;
-  text-align:center;
   font-size:18px;
+  border-radius:10px;
+  border:2px solid #ff6f91;
+  text-align:center;
 }
-
 .lock-box button{
-  background:#ff4d6d;
+  margin-top:15px;
+  width:100%;
+  padding:12px;
+  font-size:18px;
   border:none;
-  padding:12px 25px;
-  border-radius:20px;
+  border-radius:10px;
+  background:#ff6f91;
   color:white;
-  font-size:16px;
   cursor:pointer;
 }
 
+/* ===== MAIN LAYOUT ===== */
+.main{
+  display:none;
+  margin-top:40px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:0 40px;
+  gap:20px;
+}
+
+/* ===== SIDE IMAGES ===== */
+.side{
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+.side img{
+  width:180px;
+  border-radius:20px;
+  box-shadow:0 10px 30px rgba(0,0,0,.3);
+  transition:.3s;
+}
+.side img:hover{
+  transform:scale(1.05);
+}
+
+/* ===== CENTER CARD ===== */
+.card{
+  background:white;
+  padding:30px;
+  border-radius:25px;
+  max-width:420px;
+  text-align:center;
+  box-shadow:0 25px 60px rgba(0,0,0,.35);
+}
+.card h2{color:#ff5c8a}
+
 /* ===== GIFT ===== */
-#gift{
+.gift{
   display:none;
   text-align:center;
   margin-top:40px;
 }
-
 .box{
-  width:150px;
-  height:150px;
-  margin:0 auto;
+  width:150px;height:150px;
   background:#ff4d6d;
+  margin:auto;
   border-radius:20px;
   position:relative;
   cursor:pointer;
-  animation:shake 1.5s infinite;
+  animation:shake 1s infinite;
 }
-
-.box::before{
-  content:"";
-  position:absolute;
-  width:100%;
-  height:20px;
-  background:#ffd1dc;
-  top:60px;
-}
-
 @keyframes shake{
   0%,100%{transform:rotate(0)}
-  25%{transform:rotate(3deg)}
-  75%{transform:rotate(-3deg)}
+  25%{transform:rotate(2deg)}
+  75%{transform:rotate(-2deg)}
 }
-
-/* ===== CONTENT ===== */
-#content{
-  display:none;
-  padding:40px 20px;
-  text-align:center;
+.box::before,.box::after{
+  content:"";position:absolute;background:#fff
 }
-
-.card{
-  background:white;
-  max-width:400px;
-  margin:0 auto;
-  padding:25px;
-  border-radius:25px;
-  box-shadow:0 15px 40px rgba(0,0,0,.25);
-}
-
-.card h2{
-  color:#ff4d6d;
-  margin-bottom:15px;
-}
-
-/* ===== GALLERY ===== */
-.gallery{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
-  gap:15px;
-  margin-top:30px;
-}
-
-.gallery img{
-  width:100%;
-  border-radius:20px;
-  box-shadow:0 10px 25px rgba(0,0,0,.3);
-  transition:.3s;
-}
-.gallery img:hover{
-  transform:scale(1.05);
-}
+.box::before{width:20px;height:150px;left:50%;transform:translateX(-50%)}
+.box::after{height:20px;width:150px;top:50%;transform:translateY(-50%)}
 
 /* ===== FIREWORK ===== */
 canvas{
   position:fixed;
-  inset:0;
+  top:0;left:0;
   pointer-events:none;
-  z-index:-1;
+}
+
+/* ===== MOBILE ===== */
+@media(max-width:900px){
+  .main{flex-direction:column}
+  .side{flex-direction:row}
+  .side img{width:140px}
 }
 </style>
 </head>
@@ -170,90 +143,74 @@ canvas{
 
 <div class="banner">❤️ Happy Birthday Bé lu ❤️</div>
 
-<!-- LOCK -->
-<div id="lock">
-  <div class="lock-box">
-    <h2>🔒 Nhập mật khẩu</h2>
-    <input type="password" id="pass" placeholder="••••">
-    <button onclick="unlock()">Mở khóa</button>
-  </div>
+<div class="lock-box" id="lock">
+  <h2>🔒 Nhập mật khẩu</h2>
+  <input id="pass" placeholder="0502">
+  <button onclick="unlock()">Mở khóa 🎁</button>
 </div>
 
-<!-- GIFT -->
-<div id="gift">
-  <h2 style="color:white;margin-bottom:20px;">🎁 Chạm để mở quà 🎁</h2>
+<div class="gift" id="gift">
   <div class="box" onclick="openGift()"></div>
+  <p>Nhấn để mở quà 🎉</p>
 </div>
 
-<!-- CONTENT -->
-<div id="content">
+<div class="main" id="main">
+  <!-- LEFT -->
+  <div class="side">
+    <img src="./cbb9b857-25ea-4678-a2ce-e0a156cad680.jfif">
+    <img src="./415e4240-2d65-4a22-b29e-b82f6db391f0.jfif">
+  </div>
+
+  <!-- CENTER -->
   <div class="card">
     <h2>Gửi Bé lu 💖</h2>
     <p>
-      Chúc bé luôn vui vẻ, xinh đẹp và hạnh phúc mỗi ngày.<br>
+      Chúc bé luôn vui vẻ, xinh đẹp và hạnh phúc mỗi ngày.<br><br>
       Mong sinh nhật này thật đặc biệt và tràn đầy yêu thương 🥰
     </p>
+  </div>
 
-    <div class="gallery">
-      <img src="img1.jpg">
-      <img src="img2.jpg">
-      <img src="img3.jpg">
-      <img src="img4.jpg">
-    </div>
+  <!-- RIGHT -->
+  <div class="side">
+    <img src="./189eba2b-739c-4f82-8ea3-9194b14b9179.jfif">
+    <img src="./2ed21c0b-e1d3-453b-b756-dcd542fea547.jfif">
   </div>
 </div>
 
-<canvas id="firework"></canvas>
+<canvas id="fire"></canvas>
 
 <script>
-/* ===== PASSWORD ===== */
 function unlock(){
-  const p = document.getElementById("pass").value;
-  if(p==="0502"){
-    document.getElementById("lock").style.display="none";
-    document.getElementById("gift").style.display="block";
-  }else{
-    alert("Sai mật khẩu rồi 😝");
-  }
+  if(pass.value==="0502"){
+    lock.style.display="none";
+    gift.style.display="block";
+    startFirework();
+  }else alert("Sai mật khẩu 😝");
 }
-
-/* ===== OPEN GIFT ===== */
 function openGift(){
-  document.getElementById("gift").style.display="none";
-  document.getElementById("content").style.display="block";
-  startFirework();
+  gift.style.display="none";
+  main.style.display="flex";
 }
 
-/* ===== FIREWORK ===== */
-const canvas=document.getElementById("firework");
-const ctx=canvas.getContext("2d");
-canvas.width=innerWidth;
-canvas.height=innerHeight;
-
-let fireworks=[];
-
+/* FIREWORK */
+const c=document.getElementById("fire"),ctx=c.getContext("2d");
+c.width=innerWidth;c.height=innerHeight;
+let p=[];
 function startFirework(){
   setInterval(()=>{
-    fireworks.push({
-      x:Math.random()*canvas.width,
-      y:Math.random()*canvas.height/2,
-      r:0,
-      a:1
-    });
-  },300);
+    for(let i=0;i<80;i++)
+      p.push({x:innerWidth/2,y:innerHeight/2,
+        vx:(Math.random()-.5)*8,vy:(Math.random()-.5)*8,l:100});
+  },700);
 }
-
 function draw(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  fireworks.forEach((f,i)=>{
-    f.r+=2;
-    f.a-=0.02;
-    ctx.beginPath();
-    ctx.arc(f.x,f.y,f.r,0,Math.PI*2);
-    ctx.strokeStyle=`rgba(255,100,150,${f.a})`;
-    ctx.stroke();
-    if(f.a<=0) fireworks.splice(i,1);
+  ctx.clearRect(0,0,c.width,c.height);
+  p.forEach(o=>{
+    o.x+=o.vx;o.y+=o.vy;o.l--;
+    ctx.fillStyle=`rgba(255,255,255,${o.l/100})`;
+    ctx.fillRect(o.x,o.y,3,3);
   });
+  p=p.filter(o=>o.l>0);
   requestAnimationFrame(draw);
 }
 draw();
