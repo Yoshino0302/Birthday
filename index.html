@@ -2,176 +2,132 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>Happy Birthday Bé lu 💖</title>
-
+<title>Happy Birthday Bé iu 💖</title>
 <style>
-*{box-sizing:border-box;font-family:'Segoe UI',sans-serif}
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',sans-serif}
 body{
-  margin:0;
-  min-height:100vh;
-  background:linear-gradient(180deg,#ff6b8a,#ffd6e2);
+  background:linear-gradient(180deg,#ff6a8b,#ffd1dc);
   overflow-x:hidden;
+  color:#333;
 }
 
-/* ===== CANVAS FIREWORK ===== */
+/* ===== FIREWORK CANVAS ===== */
 #fireworks{
-  position:absolute;
-  top:0;
-  left:0;
-  width:100%;
-  height:140px;
+  position:fixed;
+  inset:0;
   z-index:0;
   pointer-events:none;
 }
 
-/* ===== BANNER ===== */
+/* ===== HEADER ===== */
+header{
+  position:relative;
+  z-index:5;
+  padding:40px 0 50px;
+  text-align:center;
+}
+
 .banner{
   position:relative;
-  z-index:2;
-  width:100%;
-  padding:28px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:20px;
-  background:#ff5b7f;
-  box-shadow:0 6px 25px rgba(0,0,0,.25);
-  overflow:hidden;
-  cursor:pointer;
+  display:inline-block;
+  padding:20px 90px;
+  background:linear-gradient(90deg,#ff5f87,#ff8fb3);
+  border-radius:50px;
+  box-shadow:0 15px 40px rgba(255,0,100,.35);
 }
 
-/* NEON TEXT */
-.banner .title{
+.ribbon{
+  position:absolute;
+  top:50%;
+  width:90px;
+  height:40px;
+  background:linear-gradient(180deg,#ffd6e3,#ff9ebb);
+  transform:translateY(-50%);
+}
+.ribbon.left{
+  left:-90px;
+  border-radius:40px 0 0 40px;
+}
+.ribbon.right{
+  right:-90px;
+  border-radius:0 40px 40px 0;
+}
+
+.banner h1{
   font-size:30px;
-  font-weight:900;
   color:#fff;
   text-shadow:
-    0 0 5px #fff,
-    0 0 10px #ffb6c1,
-    0 0 20px #ff5b7f,
-    0 0 40px #ff5b7f;
-  position:relative;
-  z-index:2;
-  white-space:nowrap;
+    0 0 6px #fff,
+    0 0 15px #ffb3c8,
+    0 0 30px #ff3f7f;
 }
 
-/* ===== RIBBON ===== */
-.ribbon{
-  flex:1;
-  height:20px;
-  background:linear-gradient(
-    120deg,
-    #ff8fb1 30%,
-    #ffe4ec 50%,
-    #ff8fb1 70%
-  );
-  background-size:200% 100%;
-  animation:shine 3s linear infinite, swing 4s ease-in-out infinite;
-  border-radius:0 0 22px 22px;
-}
-
-.ribbon.left{transform-origin:right top}
-.ribbon.right{transform-origin:left top}
-
-@keyframes shine{
-  to{background-position:-200% 0}
-}
-@keyframes swing{
-  0%,100%{transform:rotate(1deg)}
-  50%{transform:rotate(-1deg)}
-}
-
-/* ===== LOCK ===== */
-.lock-box{
-  margin:90px auto 0;
-  width:260px;
-  background:white;
-  padding:25px;
-  border-radius:18px;
-  text-align:center;
-  box-shadow:0 20px 40px rgba(0,0,0,.3);
-}
-.lock{
-  font-size:48px;
-  transition:.4s;
-}
-input{
-  width:180px;
-  padding:12px;
-  margin:15px 0;
-  font-size:20px;
-  border-radius:12px;
-  border:2px solid #ff5b7f;
-  text-align:center;
-  outline:none;
-}
-button{
-  padding:12px 25px;
-  border:none;
-  border-radius:12px;
-  background:#ff5b7f;
-  color:white;
-  cursor:pointer;
-}
-
-/* SHAKE */
-.shake{animation:shake .3s}
-@keyframes shake{
-  0%{transform:translateX(0)}
-  25%{transform:translateX(-6px)}
-  50%{transform:translateX(6px)}
-  75%{transform:translateX(-6px)}
-  100%{transform:translateX(0)}
-}
-
-/* ===== GIFT ===== */
-.gift{
-  font-size:60px;
-  text-align:center;
-  margin-top:25px;
-  animation:bounce 1s infinite;
-}
-@keyframes bounce{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-15px)}
-}
-
-/* ===== CONTENT ===== */
-#protected{display:none;margin-top:40px}
-.main{
-  display:flex;
-  justify-content:center;
-  gap:50px;
-}
-.side img{
-  width:170px;
-  border-radius:22px;
-  box-shadow:0 12px 30px rgba(0,0,0,.3);
-  margin-bottom:20px;
-}
-.card{
-  width:320px;
-  background:white;
-  padding:30px;
-  border-radius:25px;
-  text-align:center;
-  box-shadow:0 25px 60px rgba(0,0,0,.35);
-  animation:fadeUp .8s ease;
-}
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(40px)}
-  to{opacity:1;transform:translateY(0)}
-}
-
-/* ===== HEARTS ===== */
+/* ===== HEART FLOAT ===== */
 .heart{
-  position:fixed;
-  font-size:20px;
-  pointer-events:none;
-  animation:float 4s linear forwards;
+  position:absolute;
+  color:#ff3f7f;
+  animation:float 6s linear infinite;
 }
 @keyframes float{
-  to{transform:translateY(-100vh);opacity:0}
+  from{transform:translateY(0);opacity:1}
+  to{transform:translateY(-120px);opacity:0}
+}
+
+/* ===== MAIN ===== */
+main{
+  position:relative;
+  z-index:2;
+  padding:80px 0;
+}
+
+.layout{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:60px;
+}
+
+/* ===== IMAGES ===== */
+.column{
+  display:flex;
+  flex-direction:column;
+  gap:25px;
+}
+.column img{
+  width:170px;
+  height:230px;
+  object-fit:cover;
+  border-radius:22px;
+  box-shadow:0 12px 30px rgba(0,0,0,.25);
+}
+
+/* ===== CARD ===== */
+.card{
+  width:380px;
+  background:#fff;
+  padding:30px;
+  border-radius:22px;
+  text-align:center;
+  box-shadow:0 25px 60px rgba(0,0,0,.25);
+}
+.card h2{
+  color:#ff4f86;
+  margin-bottom:15px;
+}
+.card p{
+  font-size:15px;
+  line-height:1.7;
+}
+
+/* ===== HEART DECOR ===== */
+.flying-hearts span{
+  position:absolute;
+  font-size:16px;
+  animation:rise 7s linear infinite;
+}
+@keyframes rise{
+  from{transform:translateY(0);opacity:1}
+  to{transform:translateY(-200px);opacity:0}
 }
 </style>
 </head>
@@ -180,124 +136,87 @@ button{
 
 <canvas id="fireworks"></canvas>
 
-<div class="banner" onclick="heartBurst(event)">
-  <span class="ribbon left"></span>
-  <span class="title">❤️ Happy Birthday Bé lu ❤️</span>
-  <span class="ribbon right"></span>
-</div>
+<header>
+  <div class="banner" id="banner">
+    <div class="ribbon left"></div>
+    <div class="ribbon right"></div>
+    <h1>❤️ Happy Birthday Bé iu ❤️</h1>
+  </div>
+</header>
 
-<div class="lock-box" id="lock">
-  <div class="lock" id="lockIcon">🔒</div>
-  <input id="pass" type="password" inputmode="numeric">
-  <br>
-  <button onclick="unlock()">Mở khóa 🎁</button>
-</div>
+<main>
+  <div class="layout">
 
-<div class="gift" id="gift" style="display:none;">🎁</div>
-
-<div id="protected">
-  <div class="main">
-    <div class="side">
-      <img src="./cbb9b857-25ea-4678-a2ce-e0a156cad680.jfif">
-      <img src="./415e4240-2d65-4a22-b29e-b82f6db391f0.jfif">
+    <!-- LEFT -->
+    <div class="column">
+      <img src="189eba2b-739c-4f82-8ea3-9194b14b9179.jfif">
+      <img src="2ed21c0b-e1d3-453b-b756-dcd542fea547.jfif">
     </div>
 
+    <!-- CENTER -->
     <div class="card">
-      <h2>Gửi Bé lu 💖</h2>
+      <h2>Gửi Bé iu 💖</h2>
       <p>
-        Chúc bé luôn vui vẻ, xinh đẹp và hạnh phúc mỗi ngày.<br><br>
-        Mong sinh nhật này thật đặc biệt và tràn đầy yêu thương 🥰
+        Chúc bé iu sinh nhật dui dẻ lun xinh đẹp khoẻ mạnh và gặp nhìu may mắn.<br><br>
+        Anh mong sau này anh sẽ là người được ở bên bé iu,
+        cùng bé iu đón thật nhiều sinh nhật nữaaaaa.<br><br>
+        Anh iu bé iu nhiều lắmmmmmmmmmm 💕
       </p>
     </div>
 
-    <div class="side">
-      <img src="./189eba2b-739c-4f82-8ea3-9194b14b9179.jfif">
-      <img src="./2ed21c0b-e1d3-453b-b756-dcd542fea547.jfif">
+    <!-- RIGHT -->
+    <div class="column">
+      <img src="415e4240-2d65-4a22-b29e-b82f6db391f0.jfif">
+      <img src="cbb9b857-25ea-4678-a2ce-e0a156cad680.jfif">
     </div>
+
   </div>
-</div>
+</main>
 
 <script>
-/* ===== UNLOCK ===== */
-function unlock(){
-  const pass=document.getElementById("pass").value;
-  const lock=document.getElementById("lock");
-  const icon=document.getElementById("lockIcon");
-
-  if(pass==="0502"){
-    icon.textContent="🔓";
-    lock.style.display="none";
-    document.getElementById("gift").style.display="block";
-    startFireworks();
-
-    setTimeout(()=>{
-      document.getElementById("gift").style.display="none";
-      document.getElementById("protected").style.display="block";
-      hearts();
-    },1200);
-  }else{
-    lock.classList.add("shake");
-    setTimeout(()=>lock.classList.remove("shake"),300);
-  }
-}
-
-/* ===== FLOAT HEARTS ===== */
-function hearts(){
-  setInterval(()=>{
-    const h=document.createElement("div");
-    h.className="heart";
-    h.textContent="💖";
-    h.style.left=Math.random()*100+"vw";
-    h.style.bottom="-20px";
+/* ===== HEART EXPLOSION ON BANNER ===== */
+document.getElementById('banner').onclick = e=>{
+  for(let i=0;i<20;i++){
+    const h=document.createElement('div');
+    h.innerText='💖';
+    h.className='heart';
+    h.style.left=e.clientX+'px';
+    h.style.top=e.clientY+'px';
+    h.style.fontSize=12+Math.random()*18+'px';
+    h.style.animationDuration=3+Math.random()*3+'s';
     document.body.appendChild(h);
-    setTimeout(()=>h.remove(),4000);
-  },300);
-}
-
-/* ===== CLICK HEART BURST ===== */
-function heartBurst(e){
-  for(let i=0;i<10;i++){
-    const h=document.createElement("div");
-    h.className="heart";
-    h.textContent="💗";
-    h.style.left=e.clientX+"px";
-    h.style.top=e.clientY+"px";
-    document.body.appendChild(h);
-    setTimeout(()=>h.remove(),3000);
+    setTimeout(()=>h.remove(),6000);
   }
 }
 
 /* ===== FIREWORKS ===== */
-const canvas=document.getElementById("fireworks");
-const ctx=canvas.getContext("2d");
-canvas.width=window.innerWidth;
-canvas.height=140;
+const canvas=document.getElementById('fireworks');
+const ctx=canvas.getContext('2d');
+resize();
+window.onresize=resize;
 
-let particles=[];
-function startFireworks(){
-  setInterval(()=>{
-    const x=Math.random()*canvas.width;
-    const y=Math.random()*80+20;
-    for(let i=0;i<30;i++){
-      particles.push({
-        x,y,
-        vx:(Math.random()-.5)*4,
-        vy:(Math.random()-.5)*4,
-        life:40
-      });
-    }
-  },500);
+function resize(){
+  canvas.width=innerWidth;
+  canvas.height=innerHeight;
 }
 
+let fireworks=[];
+function Firework(){
+  this.x=Math.random()*canvas.width;
+  this.y=Math.random()*canvas.height/2;
+  this.r=0;
+  this.color=`hsl(${Math.random()*360},100%,70%)`;
+}
 function animate(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
-  particles.forEach((p,i)=>{
-    p.x+=p.vx;
-    p.y+=p.vy;
-    p.life--;
-    ctx.fillStyle="rgba(255,255,255,.8)";
-    ctx.fillRect(p.x,p.y,3,3);
-    if(p.life<=0)particles.splice(i,1);
+  if(Math.random()<0.05)fireworks.push(new Firework());
+  fireworks.forEach((f,i)=>{
+    ctx.beginPath();
+    ctx.arc(f.x,f.y,f.r,0,Math.PI*2);
+    ctx.fillStyle=f.color;
+    ctx.fill();
+    f.r+=2;
+    if(f.r>40)fireworks.splice(i,1);
   });
   requestAnimationFrame(animate);
 }
