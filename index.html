@@ -10,51 +10,103 @@ body{
   margin:0;
   min-height:100vh;
   background:linear-gradient(180deg,#ff6b8a,#ffd6e2);
-  display:flex;
-  flex-direction:column;
-  align-items:center;
+  overflow-x:hidden;
+}
+
+/* ===== CANVAS FIREWORK ===== */
+#fireworks{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:140px;
+  z-index:0;
+  pointer-events:none;
 }
 
 /* ===== BANNER ===== */
 .banner{
+  position:relative;
+  z-index:2;
   width:100%;
-  padding:22px;
-  text-align:center;
-  font-size:28px;
-  font-weight:700;
-  color:white;
+  padding:28px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:20px;
   background:#ff5b7f;
-  box-shadow:0 4px 20px rgba(0,0,0,.2);
+  box-shadow:0 6px 25px rgba(0,0,0,.25);
+  overflow:hidden;
+  cursor:pointer;
 }
 
-/* ===== LOCK CARD ===== */
+/* NEON TEXT */
+.banner .title{
+  font-size:30px;
+  font-weight:900;
+  color:#fff;
+  text-shadow:
+    0 0 5px #fff,
+    0 0 10px #ffb6c1,
+    0 0 20px #ff5b7f,
+    0 0 40px #ff5b7f;
+  position:relative;
+  z-index:2;
+  white-space:nowrap;
+}
+
+/* ===== RIBBON ===== */
+.ribbon{
+  flex:1;
+  height:20px;
+  background:linear-gradient(
+    120deg,
+    #ff8fb1 30%,
+    #ffe4ec 50%,
+    #ff8fb1 70%
+  );
+  background-size:200% 100%;
+  animation:shine 3s linear infinite, swing 4s ease-in-out infinite;
+  border-radius:0 0 22px 22px;
+}
+
+.ribbon.left{transform-origin:right top}
+.ribbon.right{transform-origin:left top}
+
+@keyframes shine{
+  to{background-position:-200% 0}
+}
+@keyframes swing{
+  0%,100%{transform:rotate(1deg)}
+  50%{transform:rotate(-1deg)}
+}
+
+/* ===== LOCK ===== */
 .lock-box{
-  margin-top:80px;
+  margin:90px auto 0;
+  width:260px;
   background:white;
   padding:25px;
   border-radius:18px;
-  box-shadow:0 20px 40px rgba(0,0,0,.25);
   text-align:center;
-  animation:fadeIn .6s ease;
+  box-shadow:0 20px 40px rgba(0,0,0,.3);
 }
 .lock{
   font-size:48px;
-  display:inline-block;
   transition:.4s;
 }
 input{
-  margin:15px 0;
-  padding:12px;
   width:180px;
+  padding:12px;
+  margin:15px 0;
   font-size:20px;
   border-radius:12px;
   border:2px solid #ff5b7f;
-  outline:none;
   text-align:center;
+  outline:none;
 }
 button{
   padding:12px 25px;
-  font-size:16px;
   border:none;
   border-radius:12px;
   background:#ff5b7f;
@@ -62,22 +114,21 @@ button{
   cursor:pointer;
 }
 
-/* ===== RUNG KHI SAI ===== */
-.shake{
-  animation:shake .3s;
-}
+/* SHAKE */
+.shake{animation:shake .3s}
 @keyframes shake{
   0%{transform:translateX(0)}
-  25%{transform:translateX(-5px)}
-  50%{transform:translateX(5px)}
-  75%{transform:translateX(-5px)}
+  25%{transform:translateX(-6px)}
+  50%{transform:translateX(6px)}
+  75%{transform:translateX(-6px)}
   100%{transform:translateX(0)}
 }
 
 /* ===== GIFT ===== */
 .gift{
   font-size:60px;
-  margin-top:30px;
+  text-align:center;
+  margin-top:25px;
   animation:bounce 1s infinite;
 }
 @keyframes bounce{
@@ -85,12 +136,8 @@ button{
   50%{transform:translateY(-15px)}
 }
 
-/* ===== MAIN CONTENT ===== */
-#protected{
-  display:none;
-  width:100%;
-  margin-top:40px;
-}
+/* ===== CONTENT ===== */
+#protected{display:none;margin-top:40px}
 .main{
   display:flex;
   justify-content:center;
@@ -98,63 +145,56 @@ button{
 }
 .side img{
   width:170px;
-  border-radius:20px;
-  box-shadow:0 10px 25px rgba(0,0,0,.25);
+  border-radius:22px;
+  box-shadow:0 12px 30px rgba(0,0,0,.3);
   margin-bottom:20px;
 }
 .card{
+  width:320px;
   background:white;
   padding:30px;
   border-radius:25px;
-  width:300px;
   text-align:center;
-  box-shadow:0 25px 50px rgba(0,0,0,.3);
+  box-shadow:0 25px 60px rgba(0,0,0,.35);
   animation:fadeUp .8s ease;
+}
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(40px)}
+  to{opacity:1;transform:translateY(0)}
 }
 
 /* ===== HEARTS ===== */
 .heart{
   position:fixed;
-  bottom:-20px;
-  color:red;
   font-size:20px;
+  pointer-events:none;
   animation:float 4s linear forwards;
 }
 @keyframes float{
-  to{
-    transform:translateY(-100vh);
-    opacity:0;
-  }
-}
-
-/* ===== ANIM ===== */
-@keyframes fadeIn{
-  from{opacity:0;transform:scale(.9)}
-  to{opacity:1;transform:scale(1)}
-}
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(40px)}
-  to{opacity:1;transform:translateY(0)}
+  to{transform:translateY(-100vh);opacity:0}
 }
 </style>
 </head>
 
 <body>
 
-<div class="banner">❤️ Happy Birthday Bé lu ❤️</div>
+<canvas id="fireworks"></canvas>
 
-<!-- LOCK -->
+<div class="banner" onclick="heartBurst(event)">
+  <span class="ribbon left"></span>
+  <span class="title">❤️ Happy Birthday Bé lu ❤️</span>
+  <span class="ribbon right"></span>
+</div>
+
 <div class="lock-box" id="lock">
-  <div class="lock" id="lockIcon">🔒</div><br>
+  <div class="lock" id="lockIcon">🔒</div>
   <input id="pass" type="password" inputmode="numeric">
   <br>
   <button onclick="unlock()">Mở khóa 🎁</button>
 </div>
 
-<!-- GIFT -->
 <div class="gift" id="gift" style="display:none;">🎁</div>
 
-<!-- CONTENT -->
 <div id="protected">
   <div class="main">
     <div class="side">
@@ -178,6 +218,7 @@ button{
 </div>
 
 <script>
+/* ===== UNLOCK ===== */
 function unlock(){
   const pass=document.getElementById("pass").value;
   const lock=document.getElementById("lock");
@@ -187,6 +228,7 @@ function unlock(){
     icon.textContent="🔓";
     lock.style.display="none";
     document.getElementById("gift").style.display="block";
+    startFireworks();
 
     setTimeout(()=>{
       document.getElementById("gift").style.display="none";
@@ -199,16 +241,67 @@ function unlock(){
   }
 }
 
+/* ===== FLOAT HEARTS ===== */
 function hearts(){
   setInterval(()=>{
     const h=document.createElement("div");
     h.className="heart";
     h.textContent="💖";
     h.style.left=Math.random()*100+"vw";
+    h.style.bottom="-20px";
     document.body.appendChild(h);
     setTimeout(()=>h.remove(),4000);
   },300);
 }
+
+/* ===== CLICK HEART BURST ===== */
+function heartBurst(e){
+  for(let i=0;i<10;i++){
+    const h=document.createElement("div");
+    h.className="heart";
+    h.textContent="💗";
+    h.style.left=e.clientX+"px";
+    h.style.top=e.clientY+"px";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),3000);
+  }
+}
+
+/* ===== FIREWORKS ===== */
+const canvas=document.getElementById("fireworks");
+const ctx=canvas.getContext("2d");
+canvas.width=window.innerWidth;
+canvas.height=140;
+
+let particles=[];
+function startFireworks(){
+  setInterval(()=>{
+    const x=Math.random()*canvas.width;
+    const y=Math.random()*80+20;
+    for(let i=0;i<30;i++){
+      particles.push({
+        x,y,
+        vx:(Math.random()-.5)*4,
+        vy:(Math.random()-.5)*4,
+        life:40
+      });
+    }
+  },500);
+}
+
+function animate(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  particles.forEach((p,i)=>{
+    p.x+=p.vx;
+    p.y+=p.vy;
+    p.life--;
+    ctx.fillStyle="rgba(255,255,255,.8)";
+    ctx.fillRect(p.x,p.y,3,3);
+    if(p.life<=0)particles.splice(i,1);
+  });
+  requestAnimationFrame(animate);
+}
+animate();
 </script>
 
 </body>
