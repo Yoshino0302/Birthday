@@ -3,138 +3,138 @@
 <head>
 <meta charset="UTF-8">
 <title>Happy Birthday Bé lu 💖</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 *{box-sizing:border-box;font-family:'Segoe UI',sans-serif}
 body{
   margin:0;
-  background:linear-gradient(180deg,#ff6f91,#ffd1dc);
   min-height:100vh;
-  overflow-x:hidden;
+  background:linear-gradient(180deg,#ff6b8a,#ffd6e2);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
 }
 
 /* ===== BANNER ===== */
 .banner{
-  background:#ff5c8a;
-  color:white;
+  width:100%;
+  padding:22px;
   text-align:center;
-  padding:30px;
-  font-size:32px;
-  font-weight:800;
-  animation:glow 2s infinite alternate;
-}
-@keyframes glow{
-  from{box-shadow:0 0 10px #fff}
-  to{box-shadow:0 0 30px #fff}
+  font-size:28px;
+  font-weight:700;
+  color:white;
+  background:#ff5b7f;
+  box-shadow:0 4px 20px rgba(0,0,0,.2);
 }
 
-/* ===== LOCK ===== */
+/* ===== LOCK CARD ===== */
 .lock-box{
-  margin:60px auto;
-  width:320px;
+  margin-top:80px;
   background:white;
-  padding:30px;
-  border-radius:20px;
+  padding:25px;
+  border-radius:18px;
+  box-shadow:0 20px 40px rgba(0,0,0,.25);
   text-align:center;
-  box-shadow:0 20px 50px rgba(0,0,0,.25);
+  animation:fadeIn .6s ease;
 }
-.lock-box input{
-  width:100%;
+.lock{
+  font-size:48px;
+  display:inline-block;
+  transition:.4s;
+}
+input{
+  margin:15px 0;
   padding:12px;
-  font-size:18px;
-  border-radius:10px;
-  border:2px solid #ff6f91;
+  width:180px;
+  font-size:20px;
+  border-radius:12px;
+  border:2px solid #ff5b7f;
+  outline:none;
   text-align:center;
 }
-.lock-box button{
-  margin-top:15px;
-  width:100%;
-  padding:12px;
-  font-size:18px;
+button{
+  padding:12px 25px;
+  font-size:16px;
   border:none;
-  border-radius:10px;
-  background:#ff6f91;
+  border-radius:12px;
+  background:#ff5b7f;
   color:white;
   cursor:pointer;
 }
 
-/* ===== MAIN LAYOUT ===== */
-.main{
-  display:none;
-  margin-top:40px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:0 40px;
-  gap:20px;
+/* ===== RUNG KHI SAI ===== */
+.shake{
+  animation:shake .3s;
+}
+@keyframes shake{
+  0%{transform:translateX(0)}
+  25%{transform:translateX(-5px)}
+  50%{transform:translateX(5px)}
+  75%{transform:translateX(-5px)}
+  100%{transform:translateX(0)}
 }
 
-/* ===== SIDE IMAGES ===== */
-.side{
+/* ===== GIFT ===== */
+.gift{
+  font-size:60px;
+  margin-top:30px;
+  animation:bounce 1s infinite;
+}
+@keyframes bounce{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-15px)}
+}
+
+/* ===== MAIN CONTENT ===== */
+#protected{
+  display:none;
+  width:100%;
+  margin-top:40px;
+}
+.main{
   display:flex;
-  flex-direction:column;
-  gap:20px;
+  justify-content:center;
+  gap:50px;
 }
 .side img{
-  width:180px;
+  width:170px;
   border-radius:20px;
-  box-shadow:0 10px 30px rgba(0,0,0,.3);
-  transition:.3s;
+  box-shadow:0 10px 25px rgba(0,0,0,.25);
+  margin-bottom:20px;
 }
-.side img:hover{
-  transform:scale(1.05);
-}
-
-/* ===== CENTER CARD ===== */
 .card{
   background:white;
   padding:30px;
   border-radius:25px;
-  max-width:420px;
+  width:300px;
   text-align:center;
-  box-shadow:0 25px 60px rgba(0,0,0,.35);
+  box-shadow:0 25px 50px rgba(0,0,0,.3);
+  animation:fadeUp .8s ease;
 }
-.card h2{color:#ff5c8a}
 
-/* ===== GIFT ===== */
-.gift{
-  display:none;
-  text-align:center;
-  margin-top:40px;
-}
-.box{
-  width:150px;height:150px;
-  background:#ff4d6d;
-  margin:auto;
-  border-radius:20px;
-  position:relative;
-  cursor:pointer;
-  animation:shake 1s infinite;
-}
-@keyframes shake{
-  0%,100%{transform:rotate(0)}
-  25%{transform:rotate(2deg)}
-  75%{transform:rotate(-2deg)}
-}
-.box::before,.box::after{
-  content:"";position:absolute;background:#fff
-}
-.box::before{width:20px;height:150px;left:50%;transform:translateX(-50%)}
-.box::after{height:20px;width:150px;top:50%;transform:translateY(-50%)}
-
-/* ===== FIREWORK ===== */
-canvas{
+/* ===== HEARTS ===== */
+.heart{
   position:fixed;
-  top:0;left:0;
-  pointer-events:none;
+  bottom:-20px;
+  color:red;
+  font-size:20px;
+  animation:float 4s linear forwards;
+}
+@keyframes float{
+  to{
+    transform:translateY(-100vh);
+    opacity:0;
+  }
 }
 
-/* ===== MOBILE ===== */
-@media(max-width:900px){
-  .main{flex-direction:column}
-  .side{flex-direction:row}
-  .side img{width:140px}
+/* ===== ANIM ===== */
+@keyframes fadeIn{
+  from{opacity:0;transform:scale(.9)}
+  to{opacity:1;transform:scale(1)}
+}
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(40px)}
+  to{opacity:1;transform:translateY(0)}
 }
 </style>
 </head>
@@ -143,79 +143,73 @@ canvas{
 
 <div class="banner">❤️ Happy Birthday Bé lu ❤️</div>
 
+<!-- LOCK -->
 <div class="lock-box" id="lock">
-  <h2>🔒 Nhập mật khẩu</h2>
-  <input id="pass" placeholder="      ">
+  <div class="lock" id="lockIcon">🔒</div><br>
+  <input id="pass" type="password" inputmode="numeric">
+  <br>
   <button onclick="unlock()">Mở khóa 🎁</button>
 </div>
 
-<div class="gift" id="gift">
-  <div class="box" onclick="openGift()"></div>
-  <p>Nhấn để mở quà 🎉</p>
-</div>
+<!-- GIFT -->
+<div class="gift" id="gift" style="display:none;">🎁</div>
 
-<div class="main" id="main">
-  <!-- LEFT -->
-  <div class="side">
-    <img src="./cbb9b857-25ea-4678-a2ce-e0a156cad680.jfif">
-    <img src="./415e4240-2d65-4a22-b29e-b82f6db391f0.jfif">
-  </div>
+<!-- CONTENT -->
+<div id="protected">
+  <div class="main">
+    <div class="side">
+      <img src="./cbb9b857-25ea-4678-a2ce-e0a156cad680.jfif">
+      <img src="./415e4240-2d65-4a22-b29e-b82f6db391f0.jfif">
+    </div>
 
-  <!-- CENTER -->
-  <div class="card">
-    <h2>Gửi Bé lu 💖</h2>
-    <p>
-      Chúc bé luôn vui vẻ, xinh đẹp và hạnh phúc mỗi ngày.<br><br>
-      Mong sinh nhật này thật đặc biệt và tràn đầy yêu thương 🥰
-    </p>
-  </div>
+    <div class="card">
+      <h2>Gửi Bé lu 💖</h2>
+      <p>
+        Chúc bé luôn vui vẻ, xinh đẹp và hạnh phúc mỗi ngày.<br><br>
+        Mong sinh nhật này thật đặc biệt và tràn đầy yêu thương 🥰
+      </p>
+    </div>
 
-  <!-- RIGHT -->
-  <div class="side">
-    <img src="./189eba2b-739c-4f82-8ea3-9194b14b9179.jfif">
-    <img src="./2ed21c0b-e1d3-453b-b756-dcd542fea547.jfif">
+    <div class="side">
+      <img src="./189eba2b-739c-4f82-8ea3-9194b14b9179.jfif">
+      <img src="./2ed21c0b-e1d3-453b-b756-dcd542fea547.jfif">
+    </div>
   </div>
 </div>
-
-<canvas id="fire"></canvas>
 
 <script>
 function unlock(){
-  if(pass.value==="0502"){
+  const pass=document.getElementById("pass").value;
+  const lock=document.getElementById("lock");
+  const icon=document.getElementById("lockIcon");
+
+  if(pass==="0502"){
+    icon.textContent="🔓";
     lock.style.display="none";
-    gift.style.display="block";
-    startFirework();
-  }else alert("Sai mật khẩu 😝");
-}
-function openGift(){
-  gift.style.display="none";
-  main.style.display="flex";
+    document.getElementById("gift").style.display="block";
+
+    setTimeout(()=>{
+      document.getElementById("gift").style.display="none";
+      document.getElementById("protected").style.display="block";
+      hearts();
+    },1200);
+  }else{
+    lock.classList.add("shake");
+    setTimeout(()=>lock.classList.remove("shake"),300);
+  }
 }
 
-/* FIREWORK */
-const c=document.getElementById("fire"),ctx=c.getContext("2d");
-c.width=innerWidth;c.height=innerHeight;
-let p=[];
-function startFirework(){
+function hearts(){
   setInterval(()=>{
-    for(let i=0;i<80;i++)
-      p.push({x:innerWidth/2,y:innerHeight/2,
-        vx:(Math.random()-.5)*8,vy:(Math.random()-.5)*8,l:100});
-  },700);
+    const h=document.createElement("div");
+    h.className="heart";
+    h.textContent="💖";
+    h.style.left=Math.random()*100+"vw";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),4000);
+  },300);
 }
-function draw(){
-  ctx.clearRect(0,0,c.width,c.height);
-  p.forEach(o=>{
-    o.x+=o.vx;o.y+=o.vy;o.l--;
-    ctx.fillStyle=`rgba(255,255,255,${o.l/100})`;
-    ctx.fillRect(o.x,o.y,3,3);
-  });
-  p=p.filter(o=>o.l>0);
-  requestAnimationFrame(draw);
-}
-draw();
 </script>
 
 </body>
 </html>
-
