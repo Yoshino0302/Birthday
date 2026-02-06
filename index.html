@@ -2,63 +2,102 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>Happy Birthday Bé iu 💖</title>
+<title>💖 Happy Birthday Bé iu 💖</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
 body{
-  background:linear-gradient(180deg,#ff6a8b,#ffd1dc);
+  height:100vh;
+  background:linear-gradient(#ff6b8a,#ffd1dc);
   overflow:hidden;
 }
 
-/* ================= LOCK SCREEN ================= */
-#lockScreen{
+/* ===== FIREWORK ===== */
+canvas{
   position:fixed;
   inset:0;
-  background:linear-gradient(180deg,#ff5f87,#ff9db8);
+  z-index:0;
+}
+
+/* ===== HEART FLOAT ===== */
+.heart{
+  position:fixed;
+  bottom:-20px;
+  font-size:18px;
+  animation:float 6s linear infinite;
+  z-index:1;
+}
+@keyframes float{
+  from{transform:translateY(0);opacity:1}
+  to{transform:translateY(-120vh);opacity:0}
+}
+
+/* ===== HEADER ===== */
+header{
+  position:relative;
+  z-index:2;
+  padding:24px;
+  text-align:center;
+  color:white;
+}
+header h1{
+  font-size:28px;
+  text-shadow:0 0 10px #fff,0 0 20px #ff4d6d;
+}
+.ribbon{
+  position:absolute;
+  top:50%;
+  width:160px;
+  height:18px;
+  background:rgba(255,255,255,.6);
+  border-radius:50px;
+}
+.ribbon.left{left:20px}
+.ribbon.right{right:20px}
+
+/* ===== LOCK SCREEN ===== */
+.lock{
+  position:absolute;
+  inset:0;
   display:flex;
   align-items:center;
   justify-content:center;
-  z-index:999;
+  z-index:3;
+  background:rgba(255,255,255,.6);
+  backdrop-filter:blur(6px);
 }
-
 .lock-box{
   background:#fff;
-  padding:35px;
-  width:300px;
-  border-radius:25px;
+  padding:30px;
+  border-radius:20px;
+  width:260px;
   text-align:center;
-  box-shadow:0 30px 60px rgba(0,0,0,.35);
-  animation:pop .8s ease;
+  box-shadow:0 20px 40px rgba(0,0,0,.3);
 }
-@keyframes pop{from{transform:scale(.6)}to{transform:scale(1)}}
-
-.lock-box h2{color:#ff4f86;margin-bottom:20px}
-
+.lock-box h3{margin-bottom:12px;color:#ff3b6f}
 .lock-box input{
   width:100%;
   padding:12px;
   border-radius:12px;
-  border:2px solid #ffd1dc;
-  outline:none;
+  border:2px solid #ff8fab;
   font-size:18px;
   text-align:center;
+  outline:none;
 }
 .lock-box button{
-  margin-top:15px;
-  width:100%;
+  margin-top:12px;
   padding:12px;
+  width:100%;
   border:none;
-  border-radius:15px;
-  background:#ff5f87;
-  color:#fff;
+  border-radius:14px;
+  background:#ff5c8a;
+  color:white;
   font-size:16px;
   cursor:pointer;
 }
-
 .shake{
   animation:shake .4s;
-  border-color:#ff0000!important;
 }
 @keyframes shake{
   0%,100%{transform:translateX(0)}
@@ -66,178 +105,197 @@ body{
   75%{transform:translateX(6px)}
 }
 
-/* ================= GIFT ================= */
-#giftScreen{
-  position:fixed;
+/* ===== GIFT ===== */
+.center{
+  position:absolute;
   inset:0;
   display:flex;
-  justify-content:center;
   align-items:center;
-  background:rgba(255,255,255,.4);
-  backdrop-filter:blur(8px);
-  z-index:998;
-  display:none;
+  justify-content:center;
+  z-index:2;
 }
-
 .gift{
   width:140px;
-  height:120px;
-  background:#ff5f87;
-  border-radius:15px;
+  height:140px;
   position:relative;
   cursor:pointer;
-  animation:bounce 1.5s infinite;
+  animation:giftShake 2s infinite;
 }
-@keyframes bounce{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-15px)}
+@keyframes giftShake{
+  0%,100%{transform:rotate(0)}
+  25%{transform:rotate(2deg)}
+  75%{transform:rotate(-2deg)}
 }
-.gift::before{
-  content:'';
-  position:absolute;
-  top:-25px;
-  left:0;
+.box{
   width:100%;
-  height:30px;
-  background:#ff7fa2;
-  border-radius:15px;
-  transition:.6s;
+  height:100%;
+  background:#ff5c8a;
+  border-radius:16px;
 }
-.open .gift::before{
-  transform:rotateX(120deg) translateY(-20px);
-}
-
-.spark{
+.lid{
   position:absolute;
-  color:#ff3f7f;
-  animation:spark 2s forwards;
+  top:-22px;
+  width:100%;
+  height:40px;
+  background:#ff8fab;
+  border-radius:16px;
+  transition:.8s;
+  transform-origin:bottom;
 }
-@keyframes spark{
-  to{transform:translateY(-120px) scale(0);opacity:0}
+.open .lid{transform:rotateX(110deg) translateY(-30px)}
+.flash{
+  position:absolute;
+  inset:-80px;
+  background:radial-gradient(circle,#fff,transparent 60%);
+  animation:flash 1s;
+}
+@keyframes flash{
+  from{opacity:0}
+  30%{opacity:1}
+  to{opacity:0}
 }
 
-/* ================= MAIN CONTENT ================= */
-#main{
+/* ===== CONTENT ===== */
+.content{
   display:none;
-  height:100vh;
-  overflow:auto;
-}
-
-header{
-  text-align:center;
-  padding:35px;
-  color:#fff;
-  font-size:28px;
-  text-shadow:0 0 10px #fff,0 0 30px #ff3f7f;
-}
-
-.layout{
+  position:relative;
+  z-index:2;
+  padding:40px;
   display:flex;
   justify-content:center;
-  gap:60px;
-  padding:40px;
+  gap:30px;
 }
+.card{
+  background:white;
+  padding:24px;
+  border-radius:20px;
+  width:320px;
+  text-align:center;
+}
+.card h2{color:#ff3b6f;margin-bottom:10px}
+.card p{line-height:1.6}
 
-.column{
+/* ===== IMAGES ===== */
+.col{
   display:flex;
   flex-direction:column;
-  gap:25px;
+  gap:20px;
 }
-.column img{
-  width:170px;
-  height:230px;
+.col img{
+  width:160px;
+  height:220px;
   object-fit:cover;
-  border-radius:22px;
-  box-shadow:0 15px 30px rgba(0,0,0,.3);
+  border-radius:20px;
+  box-shadow:0 20px 40px rgba(0,0,0,.3);
 }
-
-.card{
-  width:380px;
-  background:#fff;
-  padding:30px;
-  border-radius:22px;
-  text-align:center;
-  box-shadow:0 30px 60px rgba(0,0,0,.3);
-}
-.card h2{color:#ff4f86;margin-bottom:15px}
-.card p{line-height:1.7}
 </style>
 </head>
 
 <body>
 
-<!-- 🔐 LOCK -->
-<div id="lockScreen">
-  <div class="lock-box">
-    <h2>🔐 Nhập mật khẩu</h2>
-    <input id="pass" type="password" placeholder="••••">
-    <button onclick="checkPass()">Mở khóa 🎁</button>
+<canvas id="fire"></canvas>
+
+<header>
+  <div class="ribbon left"></div>
+  <div class="ribbon right"></div>
+  <h1>❤️ Happy Birthday Bé iu ❤️</h1>
+</header>
+
+<!-- LOCK -->
+<div class="lock" id="lock">
+  <div class="lock-box" id="lockBox">
+    <h3>🔐 Nhập mật khẩu</h3>
+    <input type="password" id="pass">
+    <button onclick="unlock()">Mở khóa 🎁</button>
   </div>
 </div>
 
-<!-- 🎁 GIFT -->
-<div id="giftScreen">
-  <div class="gift" onclick="openGift()"></div>
+<!-- GIFT -->
+<div class="center" id="giftArea" style="display:none">
+  <div class="gift" id="gift">
+    <div class="lid"></div>
+    <div class="box"></div>
+  </div>
 </div>
 
-<!-- 💖 MAIN -->
-<div id="main">
-  <header>❤️ Happy Birthday Bé iu ❤️</header>
+<!-- CONTENT -->
+<div class="content" id="content">
+  <div class="col">
+    <img src="cbb9b857-25ea-4678-a2ce-e0a156cad680.jfif">
+    <img src="189eba2b-739c-4f82-8ea3-9194b14b9179.jfif">
+  </div>
 
-  <div class="layout">
-    <div class="column">
-      <img src="189eba2b-739c-4f82-8ea3-9194b14b9179.jfif">
-      <img src="2ed21c0b-e1d3-453b-b756-dcd542fea547.jfif">
-    </div>
+  <div class="card">
+    <h2>💖 Gửi Bé iu 💖</h2>
+    <p>
+      Chúc bé iu sinh nhật dui dẻ lun xinh đẹp khoẻ mạnh và gặp nhìu may mắn.<br><br>
+      Anh mong sau này anh sẽ là người được ở bên bé iu, cùng bé iu đón thật nhiều sinh nhật nữaaaaa.<br><br>
+      Anh iu bé iu nhiều lắmmmmmmmmmm 😘
+    </p>
+  </div>
 
-    <div class="card">
-      <h2>Gửi Bé iu 💖</h2>
-      <p>
-        Chúc bé iu sinh nhật dui dẻ lun xinh đẹp khoẻ mạnh và gặp nhìu may mắn.<br><br>
-        Anh mong sau này anh sẽ là người được ở bên bé iu,
-        cùng bé iu đón thật nhiều sinh nhật nữaaaaa.<br><br>
-        Anh iu bé iu nhiều lắmmmmmmmmmm 💕
-      </p>
-    </div>
-
-    <div class="column">
-      <img src="415e4240-2d65-4a22-b29e-b82f6db391f0.jfif">
-      <img src="cbb9b857-25ea-4678-a2ce-e0a156cad680.jfif">
-    </div>
+  <div class="col">
+    <img src="2ed21c0b-e1d3-453b-b756-dcd542fea547.jfif">
+    <img src="415e4240-2d65-4a22-b29e-b82f6db391f0.jfif">
   </div>
 </div>
 
 <script>
-const PASS="0502";
+/* FIREWORK */
+const c=document.getElementById("fire"),ctx=c.getContext("2d");
+function rs(){c.width=innerWidth;c.height=innerHeight}
+rs();onresize=rs;
+let ps=[];
+function boom(x,y){
+  for(let i=0;i<80;i++)ps.push({x,y,vx:(Math.random()-.5)*6,vy:(Math.random()-.5)*6,l:100});
+}
+(function draw(){
+  ctx.clearRect(0,0,c.width,c.height);
+  ps.forEach((p,i)=>{
+    p.x+=p.vx;p.y+=p.vy;p.l--;
+    ctx.fillStyle=`rgba(255,80,120,${p.l/100})`;
+    ctx.beginPath();ctx.arc(p.x,p.y,3,0,Math.PI*2);ctx.fill();
+    if(p.l<=0)ps.splice(i,1);
+  });
+  requestAnimationFrame(draw);
+})();
+setInterval(()=>boom(Math.random()*c.width,Math.random()*c.height/2),900);
 
-function checkPass(){
-  const input=document.getElementById('pass');
-  if(input.value===PASS){
-    document.getElementById('lockScreen').style.display='none';
-    document.getElementById('giftScreen').style.display='flex';
+/* HEART */
+setInterval(()=>{
+  let h=document.createElement("div");
+  h.className="heart";
+  h.textContent="💖";
+  h.style.left=Math.random()*100+"vw";
+  h.style.fontSize=14+Math.random()*20+"px";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),6000);
+},400);
+
+/* LOCK */
+function unlock(){
+  const p=document.getElementById("pass");
+  if(p.value==="0502"){
+    document.getElementById("lock").style.display="none";
+    document.getElementById("giftArea").style.display="flex";
   }else{
-    input.classList.add('shake');
-    setTimeout(()=>input.classList.remove('shake'),400);
+    const b=document.getElementById("lockBox");
+    b.classList.add("shake");
+    setTimeout(()=>b.classList.remove("shake"),400);
   }
 }
 
-function openGift(){
-  const gift=document.querySelector('.gift');
-  gift.classList.add('open');
-  for(let i=0;i<15;i++){
-    const s=document.createElement('div');
-    s.className='spark';
-    s.innerText='💖';
-    s.style.left=50+Math.random()*40+'px';
-    s.style.top=50+Math.random()*40+'px';
-    document.getElementById('giftScreen').appendChild(s);
-    setTimeout(()=>s.remove(),2000);
-  }
+/* GIFT OPEN */
+const gift=document.getElementById("gift");
+gift.onclick=()=>{
+  gift.classList.add("open");
+  gift.insertAdjacentHTML("beforeend","<div class='flash'></div>");
+  boom(innerWidth/2,innerHeight/2);
   setTimeout(()=>{
-    document.getElementById('giftScreen').style.display='none';
-    document.getElementById('main').style.display='block';
-  },1200);
-}
+    document.getElementById("giftArea").style.display="none";
+    document.getElementById("content").style.display="flex";
+  },900);
+};
 </script>
 
 </body>
