@@ -18,9 +18,10 @@ canvas{position:fixed;inset:0;z-index:0}
 
 /* HEART */
 .heart{
-  position:fixed;bottom:-20px;
+  position:fixed;
+  bottom:-20px;
   animation:float 6s linear infinite;
-  z-index:1
+  z-index:1;
 }
 @keyframes float{
   from{transform:translateY(0);opacity:1}
@@ -28,32 +29,58 @@ canvas{position:fixed;inset:0;z-index:0}
 }
 
 /* HEADER */
-header{text-align:center;padding:24px;color:white;z-index:2;position:relative}
-header h1{text-shadow:0 0 12px #fff,0 0 24px #ff4d6d}
+header{
+  position:relative;
+  z-index:2;
+  padding:24px;
+  text-align:center;
+  color:white;
+}
+header h1{
+  font-size:28px;
+  text-shadow:0 0 12px #fff,0 0 24px #ff4d6d;
+}
 
 /* LOCK */
 .lock{
-  position:fixed;inset:0;display:flex;
-  align-items:center;justify-content:center;
-  background:#ffd6df;z-index:5
+  position:fixed;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#ffd6df;
+  z-index:5;
 }
 .lock-box{
-  background:white;padding:30px;border-radius:20px;
-  width:260px;text-align:center;
+  background:white;
+  padding:30px;
+  border-radius:20px;
+  width:260px;
+  text-align:center;
   box-shadow:0 20px 40px rgba(0,0,0,.3);
-  position:relative
+  position:relative;
 }
+.lock-box h3{margin-bottom:12px;color:#ff3b6f}
 .lock-box input{
-  width:100%;padding:12px;border-radius:12px;
+  width:100%;
+  padding:12px;
+  border-radius:12px;
   border:2px solid #ff8fab;
-  font-size:18px;text-align:center;
+  font-size:18px;
+  text-align:center;
   outline:none;
   transition:all .4s ease;
 }
 .lock-box button{
-  margin-top:12px;width:100%;padding:12px;
-  border:none;border-radius:14px;
-  background:#ff5c8a;color:white;cursor:pointer
+  margin-top:12px;
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:14px;
+  background:#ff5c8a;
+  color:white;
+  font-size:16px;
+  cursor:pointer;
 }
 
 /* SHAKE */
@@ -64,63 +91,76 @@ header h1{text-shadow:0 0 12px #fff,0 0 24px #ff4d6d}
   75%{transform:translateX(6px)}
 }
 
-/* 🔥 BURN EFFECT – ƯU TIÊN CAO */
-.lock-box input.burn-1{
-  background:#fff5f8;
-  border-color:#ff9ab3;
-  box-shadow:0 0 8px #ff9ab3;
-}
-.lock-box input.burn-2{
-  background:#ffeaf0;
-  border-color:#ff7fa3;
-  box-shadow:0 0 12px #ff7fa3;
-}
-.lock-box input.burn-3{
-  background:#ffdbe6;
-  border-color:#ff5c8a;
-  box-shadow:0 0 16px #ff5c8a;
-}
-.lock-box input.burn-4{
-  background:#ffc7d6;
-  border-color:#ff3b6f;
-  box-shadow:0 0 20px #ff3b6f;
-}
-.lock-box input.burn-5{
-  background:#ffb3c6;
-  border-color:#ff2e63;
-  box-shadow:0 0 26px #ff2e63;
-}
-
 /* SMOKE */
 .smoke{
   position:absolute;
-  left:50%;bottom:75px;
-  width:8px;height:8px;
-  background:rgba(255,150,180,.6);
+  left:50%;
+  bottom:78px;
+  width:10px;
+  height:10px;
+  background:rgba(255,160,190,.6);
   border-radius:50%;
   animation:smokeUp 2s ease-out forwards;
 }
 @keyframes smokeUp{
-  from{transform:translateX(-50%) scale(1);opacity:.6}
-  to{transform:translateX(-50%) translateY(-60px) scale(2);opacity:0}
+  from{transform:translateX(-50%) scale(1);opacity:.7}
+  to{transform:translateX(-50%) translateY(-70px) scale(2);opacity:0}
 }
 
 /* GIFT */
-.center{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:3}
-.gift{width:140px;height:140px;cursor:pointer;animation:giftShake 2s infinite}
+.center{
+  position:fixed;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:3;
+}
+.gift{
+  width:140px;
+  height:140px;
+  cursor:pointer;
+  animation:giftShake 2s infinite;
+}
 @keyframes giftShake{
   0%,100%{transform:rotate(0)}
   25%{transform:rotate(2deg)}
   75%{transform:rotate(-2deg)}
 }
-.box{width:100%;height:100%;background:#ff5c8a;border-radius:16px}
-.lid{position:absolute;top:-22px;width:100%;height:40px;background:#ff8fab;border-radius:16px;transition:.8s}
+.box{
+  width:100%;
+  height:100%;
+  background:#ff5c8a;
+  border-radius:16px;
+}
+.lid{
+  position:absolute;
+  top:-22px;
+  width:100%;
+  height:40px;
+  background:#ff8fab;
+  border-radius:16px;
+  transition:.8s;
+}
 .open .lid{transform:rotateX(110deg) translateY(-30px)}
 
-.content{display:none;z-index:2;position:relative;padding:40px;gap:30px;justify-content:center}
-.card{background:white;padding:24px;border-radius:20px;width:320px}
-.col{display:flex;flex-direction:column;gap:20px}
-.col img{width:160px;height:220px;border-radius:20px;object-fit:cover}
+/* CONTENT */
+.content{
+  display:none;
+  position:relative;
+  z-index:2;
+  padding:40px;
+  justify-content:center;
+}
+.card{
+  background:white;
+  padding:24px;
+  border-radius:20px;
+  width:320px;
+  text-align:center;
+}
+.card h2{color:#ff3b6f;margin-bottom:10px}
+.card p{line-height:1.6}
 </style>
 </head>
 
@@ -150,7 +190,10 @@ header h1{text-shadow:0 0 12px #fff,0 0 24px #ff4d6d}
 <div class="content" id="content">
   <div class="card">
     <h2>💖 Gửi Bé iu 💖</h2>
-    <p>Valentine này anh mong bé iu luôn hạnh phúc và được yêu thương thật nhiều 💕</p>
+    <p>
+      Valentine này anh mong bé iu luôn hạnh phúc, luôn cười thật tươi  
+      và cảm nhận được tình cảm chân thành mà anh dành cho bé iu 💕
+    </p>
   </div>
 </div>
 
@@ -160,21 +203,32 @@ const c=document.getElementById("fire"),ctx=c.getContext("2d");
 c.width=innerWidth;c.height=innerHeight;
 let ps=[];
 function boom(x,y){
-  for(let i=0;i<50;i++)
-    ps.push({x,y,vx:(Math.random()-.5)*6,vy:(Math.random()-.5)*6,l:80});
+  for(let i=0;i<40;i++)
+    ps.push({x,y,vx:(Math.random()-.5)*6,vy:(Math.random()-.5)*6,l:70});
 }
 (function draw(){
   ctx.clearRect(0,0,c.width,c.height);
   ps.forEach((p,i)=>{
     p.x+=p.vx;p.y+=p.vy;p.l--;
-    ctx.fillStyle=`rgba(255,80,120,${p.l/80})`;
+    ctx.fillStyle=`rgba(255,80,120,${p.l/70})`;
     ctx.beginPath();ctx.arc(p.x,p.y,3,0,Math.PI*2);ctx.fill();
     if(p.l<=0)ps.splice(i,1);
   });
   requestAnimationFrame(draw);
 })();
 
-/* UNLOCK */
+/* HEART */
+setInterval(()=>{
+  let h=document.createElement("div");
+  h.className="heart";
+  h.textContent="💖";
+  h.style.left=Math.random()*100+"vw";
+  h.style.fontSize=14+Math.random()*20+"px";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),6000);
+},400);
+
+/* UNLOCK – HIỆU ỨNG CHẮC CHẮN THẤY */
 let fail=0;
 function unlock(){
   const p=document.getElementById("pass");
@@ -190,17 +244,44 @@ function unlock(){
   box.classList.add("shake");
   setTimeout(()=>box.classList.remove("shake"),400);
 
+  /* SMOKE */
   const s=document.createElement("div");
   s.className="smoke";
   box.appendChild(s);
   setTimeout(()=>s.remove(),2000);
 
-  p.className="";
-  p.classList.add("burn-"+Math.min(fail,5));
+  /* 🔥 BURN – INLINE STYLE (KHÔNG THỂ MẤT) */
+  const level=Math.min(fail,5);
+  const colors=[
+    "#fff",
+    "#fff5f8",
+    "#ffeaf0",
+    "#ffdbe6",
+    "#ffc7d6",
+    "#ffb3c6"
+  ];
+  const glow=[
+    "none",
+    "0 0 8px #ff9ab3",
+    "0 0 12px #ff7fa3",
+    "0 0 16px #ff5c8a",
+    "0 0 20px #ff3b6f",
+    "0 0 26px #ff2e63"
+  ];
+  p.style.background=colors[level];
+  p.style.boxShadow=glow[level];
+  p.style.borderColor="#ff5c8a";
   p.value="";
 
+  /* 💥 5 lần → nổ + reset */
   if(fail>=5){
-    setTimeout(()=>{boom(innerWidth/2,innerHeight/2);fail=0;p.className="";},300);
+    setTimeout(()=>{
+      boom(innerWidth/2,innerHeight/2);
+      fail=0;
+      p.style.background="#fff";
+      p.style.boxShadow="none";
+      p.style.borderColor="#ff8fab";
+    },300);
   }
 }
 </script>
