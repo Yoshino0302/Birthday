@@ -2,25 +2,25 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>💖 Happy Birthday Bé iu 💖</title>
+<title>💘 Happy Valentine Bé iu 💘</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
 body{
   height:100vh;
-  background:linear-gradient(#ff6b8a,#ffd1dc);
+  background:linear-gradient(#ff9aaf,#ffd6df);
   overflow:hidden;
 }
 
-/* ===== FIREWORK ===== */
+/* CANVAS */
 canvas{
   position:fixed;
   inset:0;
   z-index:0;
 }
 
-/* ===== HEART FLOAT ===== */
+/* HEART FLOAT */
 .heart{
   position:fixed;
   bottom:-20px;
@@ -33,7 +33,7 @@ canvas{
   to{transform:translateY(-120vh);opacity:0}
 }
 
-/* ===== HEADER ===== */
+/* HEADER */
 header{
   position:relative;
   z-index:2;
@@ -43,32 +43,21 @@ header{
 }
 header h1{
   font-size:28px;
-  text-shadow:0 0 10px #fff,0 0 20px #ff4d6d;
+  text-shadow:0 0 12px #fff,0 0 24px #ff4d6d;
 }
-.ribbon{
-  position:absolute;
-  top:50%;
-  width:160px;
-  height:18px;
-  background:rgba(255,255,255,.6);
-  border-radius:50px;
-}
-.ribbon.left{left:20px}
-.ribbon.right{right:20px}
 
-/* ===== LOCK SCREEN ===== */
+/* LOCK SCREEN (FULL BLOCK) */
 .lock{
-  position:absolute;
+  position:fixed;
   inset:0;
   display:flex;
   align-items:center;
   justify-content:center;
-  z-index:3;
-  background:rgba(255,255,255,.6);
-  backdrop-filter:blur(6px);
+  z-index:5;
+  background:#ffd6df;
 }
 .lock-box{
-  background:#fff;
+  background:white;
   padding:30px;
   border-radius:20px;
   width:260px;
@@ -96,23 +85,21 @@ header h1{
   font-size:16px;
   cursor:pointer;
 }
-.shake{
-  animation:shake .4s;
-}
+.shake{animation:shake .4s}
 @keyframes shake{
   0%,100%{transform:translateX(0)}
   25%{transform:translateX(-6px)}
   75%{transform:translateX(6px)}
 }
 
-/* ===== GIFT ===== */
+/* GIFT */
 .center{
-  position:absolute;
+  position:fixed;
   inset:0;
-  display:flex;
+  display:none;
   align-items:center;
   justify-content:center;
-  z-index:2;
+  z-index:3;
 }
 .gift{
   width:140px;
@@ -155,13 +142,12 @@ header h1{
   to{opacity:0}
 }
 
-/* ===== CONTENT ===== */
+/* CONTENT (ẨN HOÀN TOÀN BAN ĐẦU) */
 .content{
   display:none;
   position:relative;
   z-index:2;
   padding:40px;
-  display:flex;
   justify-content:center;
   gap:30px;
 }
@@ -175,7 +161,7 @@ header h1{
 .card h2{color:#ff3b6f;margin-bottom:10px}
 .card p{line-height:1.6}
 
-/* ===== IMAGES ===== */
+/* IMAGES */
 .col{
   display:flex;
   flex-direction:column;
@@ -196,22 +182,20 @@ header h1{
 <canvas id="fire"></canvas>
 
 <header>
-  <div class="ribbon left"></div>
-  <div class="ribbon right"></div>
-  <h1>❤️ Happy Birthday Bé iu ❤️</h1>
+  <h1>💘 Happy Valentine Bé iu 💘</h1>
 </header>
 
 <!-- LOCK -->
 <div class="lock" id="lock">
   <div class="lock-box" id="lockBox">
     <h3>🔐 Nhập mật khẩu</h3>
-    <input type="password" id="pass">
-    <button onclick="unlock()">Mở khóa 🎁</button>
+    <input type="password" id="pass" placeholder="••••">
+    <button onclick="unlock()">Mở khóa 💝</button>
   </div>
 </div>
 
 <!-- GIFT -->
-<div class="center" id="giftArea" style="display:none">
+<div class="center" id="giftArea">
   <div class="gift" id="gift">
     <div class="lid"></div>
     <div class="box"></div>
@@ -228,9 +212,10 @@ header h1{
   <div class="card">
     <h2>💖 Gửi Bé iu 💖</h2>
     <p>
-      Chúc bé iu sinh nhật dui dẻ lun xinh đẹp khoẻ mạnh và gặp nhìu may mắn.<br><br>
-      Anh mong sau này anh sẽ là người được ở bên bé iu, cùng bé iu đón thật nhiều sinh nhật nữaaaaa.<br><br>
-      Anh iu bé iu nhiều lắmmmmmmmmmm 😘
+      Valentine này anh chúc bé iu luôn vui vẻ, luôn cười thật tươi và lúc nào cũng cảm thấy được yêu thương.<br><br>
+      Cảm ơn bé iu vì đã xuất hiện và làm những ngày của anh trở nên đặc biệt hơn.<br><br>
+      Mong rằng không chỉ Valentine này, mà rất nhiều Valentine sau nữa,
+      anh vẫn được ở cạnh bé iu 💕
     </p>
   </div>
 
@@ -272,7 +257,7 @@ setInterval(()=>{
   setTimeout(()=>h.remove(),6000);
 },400);
 
-/* LOCK */
+/* UNLOCK */
 function unlock(){
   const p=document.getElementById("pass");
   if(p.value==="0502"){
