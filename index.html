@@ -46,7 +46,7 @@ header h1{
   text-shadow:0 0 12px #fff,0 0 24px #ff4d6d;
 }
 
-/* LOCK SCREEN (FULL BLOCK) */
+/* LOCK SCREEN */
 .lock{
   position:fixed;
   inset:0;
@@ -63,6 +63,7 @@ header h1{
   width:260px;
   text-align:center;
   box-shadow:0 20px 40px rgba(0,0,0,.3);
+  position:relative;
 }
 .lock-box h3{margin-bottom:12px;color:#ff3b6f}
 .lock-box input{
@@ -73,6 +74,7 @@ header h1{
   font-size:18px;
   text-align:center;
   outline:none;
+  transition:all .4s ease;
 }
 .lock-box button{
   margin-top:12px;
@@ -91,6 +93,29 @@ header h1{
   25%{transform:translateX(-6px)}
   75%{transform:translateX(6px)}
 }
+
+/* SMOKE */
+.smoke{
+  position:absolute;
+  left:50%;
+  bottom:80px;
+  width:8px;
+  height:8px;
+  background:rgba(255,150,180,.6);
+  border-radius:50%;
+  animation:smokeUp 2s ease-out forwards;
+}
+@keyframes smokeUp{
+  from{transform:translateX(-50%) scale(1);opacity:.6}
+  to{transform:translateX(-50%) translateY(-60px) scale(2);opacity:0}
+}
+
+/* BURN EFFECT (NHẸ – ĐẸP) */
+.burn-1{box-shadow:0 0 8px #ff9ab3}
+.burn-2{background:#fff0f5;box-shadow:0 0 12px #ff7fa3}
+.burn-3{background:#ffe3eb;box-shadow:0 0 16px #ff5c8a}
+.burn-4{background:#ffd1dc;box-shadow:0 0 20px #ff3b6f}
+.burn-5{background:#ffb3c6;box-shadow:0 0 25px #ff2e63}
 
 /* GIFT */
 .center{
@@ -142,7 +167,7 @@ header h1{
   to{opacity:0}
 }
 
-/* CONTENT (ẨN HOÀN TOÀN BAN ĐẦU) */
+/* CONTENT */
 .content{
   display:none;
   position:relative;
@@ -160,8 +185,6 @@ header h1{
 }
 .card h2{color:#ff3b6f;margin-bottom:10px}
 .card p{line-height:1.6}
-
-/* IMAGES */
 .col{
   display:flex;
   flex-direction:column;
@@ -185,7 +208,6 @@ header h1{
   <h1>💘 Happy Valentine Bé iu 💘</h1>
 </header>
 
-<!-- LOCK -->
 <div class="lock" id="lock">
   <div class="lock-box" id="lockBox">
     <h3>🔐 Nhập mật khẩu</h3>
@@ -194,7 +216,6 @@ header h1{
   </div>
 </div>
 
-<!-- GIFT -->
 <div class="center" id="giftArea">
   <div class="gift" id="gift">
     <div class="lid"></div>
@@ -202,7 +223,6 @@ header h1{
   </div>
 </div>
 
-<!-- CONTENT -->
 <div class="content" id="content">
   <div class="col">
     <img src="cbb9b857-25ea-4678-a2ce-e0a156cad680.jfif">
@@ -232,19 +252,19 @@ function rs(){c.width=innerWidth;c.height=innerHeight}
 rs();onresize=rs;
 let ps=[];
 function boom(x,y){
-  for(let i=0;i<80;i++)ps.push({x,y,vx:(Math.random()-.5)*6,vy:(Math.random()-.5)*6,l:100});
+  for(let i=0;i<60;i++)
+    ps.push({x,y,vx:(Math.random()-.5)*6,vy:(Math.random()-.5)*6,l:80});
 }
 (function draw(){
   ctx.clearRect(0,0,c.width,c.height);
   ps.forEach((p,i)=>{
     p.x+=p.vx;p.y+=p.vy;p.l--;
-    ctx.fillStyle=`rgba(255,80,120,${p.l/100})`;
+    ctx.fillStyle=`rgba(255,80,120,${p.l/80})`;
     ctx.beginPath();ctx.arc(p.x,p.y,3,0,Math.PI*2);ctx.fill();
     if(p.l<=0)ps.splice(i,1);
   });
   requestAnimationFrame(draw);
 })();
-setInterval(()=>boom(Math.random()*c.width,Math.random()*c.height/2),900);
 
 /* HEART */
 setInterval(()=>{
@@ -257,24 +277,45 @@ setInterval(()=>{
   setTimeout(()=>h.remove(),6000);
 },400);
 
-/* UNLOCK */
+/* UNLOCK + SMOKE + BURN */
+let failCount=0;
 function unlock(){
   const p=document.getElementById("pass");
+  const box=document.getElementById("lockBox");
+
   if(p.value==="0502"){
     document.getElementById("lock").style.display="none";
     document.getElementById("giftArea").style.display="flex";
-  }else{
-    const b=document.getElementById("lockBox");
-    b.classList.add("shake");
-    setTimeout(()=>b.classList.remove("shake"),400);
+    return;
+  }
+
+  failCount++;
+  box.classList.add("shake");
+  setTimeout(()=>box.classList.remove("shake"),400);
+
+  const s=document.createElement("div");
+  s.className="smoke";
+  box.appendChild(s);
+  setTimeout(()=>s.remove(),2000);
+
+  p.className="";
+  p.classList.add("burn-"+Math.min(failCount,5));
+  p.value="";
+
+  if(failCount>=5){
+    setTimeout(()=>{
+      boom(innerWidth/2,innerHeight/2);
+      failCount=0;
+      p.className="";
+    },300);
   }
 }
 
-/* GIFT OPEN */
-const gift=document.getElementById("gift");
-gift.onclick=()=>{
-  gift.classList.add("open");
-  gift.insertAdjacentHTML("beforeend","<div class='flash'></div>");
+/* GIFT */
+document.getElementById("gift").onclick=()=>{
+  const g=document.getElementById("gift");
+  g.classList.add("open");
+  g.insertAdjacentHTML("beforeend","<div class='flash'></div>");
   boom(innerWidth/2,innerHeight/2);
   setTimeout(()=>{
     document.getElementById("giftArea").style.display="none";
