@@ -14,12 +14,17 @@ body{
 }
 
 /* CANVAS */
-canvas{position:fixed;inset:0;z-index:0}
+canvas{
+  position:fixed;
+  inset:0;
+  z-index:0;
+}
 
-/* HEART */
+/* HEART FLOAT */
 .heart{
   position:fixed;
   bottom:-20px;
+  font-size:18px;
   animation:float 6s linear infinite;
   z-index:1;
 }
@@ -41,15 +46,15 @@ header h1{
   text-shadow:0 0 12px #fff,0 0 24px #ff4d6d;
 }
 
-/* LOCK */
+/* LOCK SCREEN */
 .lock{
   position:fixed;
   inset:0;
   display:flex;
   align-items:center;
   justify-content:center;
-  background:#ffd6df;
   z-index:5;
+  background:#ffd6df;
 }
 .lock-box{
   background:white;
@@ -58,9 +63,11 @@ header h1{
   width:260px;
   text-align:center;
   box-shadow:0 20px 40px rgba(0,0,0,.3);
-  position:relative;
 }
-.lock-box h3{margin-bottom:12px;color:#ff3b6f}
+.lock-box h3{
+  margin-bottom:12px;
+  color:#ff3b6f;
+}
 .lock-box input{
   width:100%;
   padding:12px;
@@ -69,12 +76,11 @@ header h1{
   font-size:18px;
   text-align:center;
   outline:none;
-  transition:all .4s ease;
 }
 .lock-box button{
   margin-top:12px;
-  width:100%;
   padding:12px;
+  width:100%;
   border:none;
   border-radius:14px;
   background:#ff5c8a;
@@ -82,29 +88,13 @@ header h1{
   font-size:16px;
   cursor:pointer;
 }
-
-/* SHAKE */
-.shake{animation:shake .4s}
+.shake{
+  animation:shake .4s;
+}
 @keyframes shake{
   0%,100%{transform:translateX(0)}
   25%{transform:translateX(-6px)}
   75%{transform:translateX(6px)}
-}
-
-/* SMOKE */
-.smoke{
-  position:absolute;
-  left:50%;
-  bottom:78px;
-  width:10px;
-  height:10px;
-  background:rgba(255,160,190,.6);
-  border-radius:50%;
-  animation:smokeUp 2s ease-out forwards;
-}
-@keyframes smokeUp{
-  from{transform:translateX(-50%) scale(1);opacity:.7}
-  to{transform:translateX(-50%) translateY(-70px) scale(2);opacity:0}
 }
 
 /* GIFT */
@@ -119,6 +109,7 @@ header h1{
 .gift{
   width:140px;
   height:140px;
+  position:relative;
   cursor:pointer;
   animation:giftShake 2s infinite;
 }
@@ -141,8 +132,22 @@ header h1{
   background:#ff8fab;
   border-radius:16px;
   transition:.8s;
+  transform-origin:bottom;
 }
-.open .lid{transform:rotateX(110deg) translateY(-30px)}
+.open .lid{
+  transform:rotateX(110deg) translateY(-30px);
+}
+.flash{
+  position:absolute;
+  inset:-80px;
+  background:radial-gradient(circle,#fff,transparent 60%);
+  animation:flash 1s;
+}
+@keyframes flash{
+  from{opacity:0}
+  30%{opacity:1}
+  to{opacity:0}
+}
 
 /* CONTENT */
 .content{
@@ -151,6 +156,7 @@ header h1{
   z-index:2;
   padding:40px;
   justify-content:center;
+  gap:30px;
 }
 .card{
   background:white;
@@ -159,8 +165,27 @@ header h1{
   width:320px;
   text-align:center;
 }
-.card h2{color:#ff3b6f;margin-bottom:10px}
-.card p{line-height:1.6}
+.card h2{
+  color:#ff3b6f;
+  margin-bottom:10px;
+}
+.card p{
+  line-height:1.6;
+}
+
+/* IMAGES */
+.col{
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+.col img{
+  width:160px;
+  height:220px;
+  object-fit:cover;
+  border-radius:20px;
+  box-shadow:0 20px 40px rgba(0,0,0,.3);
+}
 </style>
 </head>
 
@@ -172,6 +197,7 @@ header h1{
   <h1>💘 Happy Valentine Bé iu 💘</h1>
 </header>
 
+<!-- LOCK -->
 <div class="lock" id="lock">
   <div class="lock-box" id="lockBox">
     <h3>🔐 Nhập mật khẩu</h3>
@@ -180,6 +206,7 @@ header h1{
   </div>
 </div>
 
+<!-- GIFT -->
 <div class="center" id="giftArea">
   <div class="gift" id="gift">
     <div class="lid"></div>
@@ -187,35 +214,60 @@ header h1{
   </div>
 </div>
 
+<!-- CONTENT -->
 <div class="content" id="content">
+  <div class="col">
+    <img src="cbb9b857-25ea-4678-a2ce-e0a156cad680.jfif">
+    <img src="189eba2b-739c-4f82-8ea3-9194b14b9179.jfif">
+  </div>
+
   <div class="card">
     <h2>💖 Gửi Bé iu 💖</h2>
     <p>
-      Valentine này anh mong bé iu luôn hạnh phúc, luôn cười thật tươi  
-      và cảm nhận được tình cảm chân thành mà anh dành cho bé iu 💕
+      Valentine này anh chúc bé iu luôn vui vẻ, luôn cười thật tươi và lúc nào cũng cảm thấy được yêu thương.<br><br>
+      Cảm ơn bé iu vì đã xuất hiện và làm những ngày của anh trở nên đặc biệt hơn.<br><br>
+      Mong rằng không chỉ Valentine này, mà rất nhiều Valentine sau nữa,
+      anh vẫn được ở cạnh bé iu 💕
     </p>
+  </div>
+
+  <div class="col">
+    <img src="2ed21c0b-e1d3-453b-b756-dcd542fea547.jfif">
+    <img src="415e4240-2d65-4a22-b29e-b82f6db391f0.jfif">
   </div>
 </div>
 
 <script>
 /* FIREWORK */
 const c=document.getElementById("fire"),ctx=c.getContext("2d");
-c.width=innerWidth;c.height=innerHeight;
+function resize(){c.width=innerWidth;c.height=innerHeight}
+resize();onresize=resize;
 let ps=[];
 function boom(x,y){
-  for(let i=0;i<40;i++)
-    ps.push({x,y,vx:(Math.random()-.5)*6,vy:(Math.random()-.5)*6,l:70});
+  for(let i=0;i<80;i++){
+    ps.push({
+      x,y,
+      vx:(Math.random()-.5)*6,
+      vy:(Math.random()-.5)*6,
+      l:100
+    });
+  }
 }
 (function draw(){
   ctx.clearRect(0,0,c.width,c.height);
   ps.forEach((p,i)=>{
-    p.x+=p.vx;p.y+=p.vy;p.l--;
-    ctx.fillStyle=`rgba(255,80,120,${p.l/70})`;
-    ctx.beginPath();ctx.arc(p.x,p.y,3,0,Math.PI*2);ctx.fill();
+    p.x+=p.vx;
+    p.y+=p.vy;
+    p.l--;
+    ctx.fillStyle=`rgba(255,80,120,${p.l/100})`;
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,3,0,Math.PI*2);
+    ctx.fill();
     if(p.l<=0)ps.splice(i,1);
   });
   requestAnimationFrame(draw);
 })();
+setInterval(()=>boom(Math.random()*c.width,Math.random()*c.height/2),900);
 
 /* HEART */
 setInterval(()=>{
@@ -228,62 +280,31 @@ setInterval(()=>{
   setTimeout(()=>h.remove(),6000);
 },400);
 
-/* UNLOCK – HIỆU ỨNG CHẮC CHẮN THẤY */
-let fail=0;
+/* UNLOCK */
 function unlock(){
   const p=document.getElementById("pass");
-  const box=document.getElementById("lockBox");
-
   if(p.value==="0502"){
     document.getElementById("lock").style.display="none";
     document.getElementById("giftArea").style.display="flex";
-    return;
-  }
-
-  fail++;
-  box.classList.add("shake");
-  setTimeout(()=>box.classList.remove("shake"),400);
-
-  /* SMOKE */
-  const s=document.createElement("div");
-  s.className="smoke";
-  box.appendChild(s);
-  setTimeout(()=>s.remove(),2000);
-
-  /* 🔥 BURN – INLINE STYLE (KHÔNG THỂ MẤT) */
-  const level=Math.min(fail,5);
-  const colors=[
-    "#fff",
-    "#fff5f8",
-    "#ffeaf0",
-    "#ffdbe6",
-    "#ffc7d6",
-    "#ffb3c6"
-  ];
-  const glow=[
-    "none",
-    "0 0 8px #ff9ab3",
-    "0 0 12px #ff7fa3",
-    "0 0 16px #ff5c8a",
-    "0 0 20px #ff3b6f",
-    "0 0 26px #ff2e63"
-  ];
-  p.style.background=colors[level];
-  p.style.boxShadow=glow[level];
-  p.style.borderColor="#ff5c8a";
-  p.value="";
-
-  /* 💥 5 lần → nổ + reset */
-  if(fail>=5){
-    setTimeout(()=>{
-      boom(innerWidth/2,innerHeight/2);
-      fail=0;
-      p.style.background="#fff";
-      p.style.boxShadow="none";
-      p.style.borderColor="#ff8fab";
-    },300);
+  }else{
+    const b=document.getElementById("lockBox");
+    b.classList.add("shake");
+    setTimeout(()=>b.classList.remove("shake"),400);
+    p.value="";
   }
 }
+
+/* GIFT OPEN */
+const gift=document.getElementById("gift");
+gift.onclick=()=>{
+  gift.classList.add("open");
+  gift.insertAdjacentHTML("beforeend","<div class='flash'></div>");
+  boom(innerWidth/2,innerHeight/2);
+  setTimeout(()=>{
+    document.getElementById("giftArea").style.display="none";
+    document.getElementById("content").style.display="flex";
+  },900);
+};
 </script>
 
 </body>
