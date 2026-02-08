@@ -71,6 +71,16 @@ body {
   50% { transform: rotateX(5deg) rotateY(-5deg) translateY(-15px); }
 }
 
+/* SHAKE ANIMATION FOR WRONG PASSWORD */
+.shake {
+  animation: shake 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+@keyframes shake {
+  0%, 100% { transform: rotateX(5deg) rotateY(-5deg) translateX(0); }
+  25% { transform: rotateX(5deg) rotateY(-5deg) translateX(-10px); }
+  75% { transform: rotateX(5deg) rotateY(-5deg) translateX(10px); }
+}
+
 /* FACEID WITH 3D SCAN */
 .faceid {
   width: 100px;
@@ -136,6 +146,16 @@ input:focus {
 }
 @keyframes ripple {
   to { transform: scale(8); opacity: 0; }
+}
+
+/* ERROR MESSAGE */
+#error {
+  display: none;
+  margin-top: 12px;
+  color: #ff4d6d;
+  font-size: 16px;
+  font-weight: bold;
+  text-shadow: 0 0 10px rgba(255, 77, 109, 0.8);
 }
 
 /* BUTTON WITH 3D PRESS */
@@ -284,8 +304,9 @@ for (let i = 0; i < 25; i++) {
     <div class="input-wrap">
       <input type="password" id="pass" placeholder="••••">
     </div>
+    <div id="error"></div>
     <button onclick="unlock()">Mở khóa 💝</button>
-    <div class="loading" id="loading">Đang xác thực FaceID…</div>
+    <div class="loading" id="loading">Đang mở khóa…</div>
   </div>
 </div>
 
@@ -294,7 +315,7 @@ for (let i = 0; i < 25; i++) {
   <div class="big-heart">💖</div>
 </div>
 
-<div id="typing">Em là tình yêu của anh, mãi mãi...</div>
+<div id="typing">Ngày 14/02 là ngày chúng ta gặp nhau, em là tình yêu vĩnh cửu của anh, mãi mãi bên nhau... 💕</div>
 <div id="gift">🎁</div>
 
 <script>
@@ -334,7 +355,9 @@ function boom(x, y) {
 
 /* UNLOCK FLOW WITH CINEMATIC EFFECTS */
 function unlock() {
-  if (pass.value === "0502") {
+  const errorDiv = document.getElementById("error");
+  const lockCard = document.getElementById("lockCard");
+  if (pass.value === "1402") {
     loading.style.display = "block";
     setTimeout(() => {
       lock.style.opacity = 0;
@@ -373,9 +396,15 @@ function unlock() {
         }, 3500);
       }, 1000);
     }, 1500);
+  } else {
+    // Wrong password: shake and show error
+    lockCard.classList.add("shake");
+    errorDiv.textContent = "Sai rồi, hãy thử lại với ngày đặc biệt của chúng ta... 💔";
+    errorDiv.style.display = "block";
+    setTimeout(() => {
+      lockCard.classList.remove("shake");
+      errorDiv.style.display = "none";
+    }, 3000);
   }
 }
-</script>
-
-</body>
-</html>
+</
