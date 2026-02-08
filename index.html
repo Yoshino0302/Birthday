@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>💘 Happy Valentine Bé iu 💘</title>
+<title>💘 Valentine 💘</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -11,6 +11,18 @@ body{
   height:100vh;
   background:radial-gradient(circle at top,#ffe1e8,#ff9aaf);
   overflow:hidden;
+}
+
+/* BACKGROUND HEART FLOAT */
+.bg-heart{
+  position:fixed;
+  font-size:24px;
+  opacity:.25;
+  animation:float 10s linear infinite;
+}
+@keyframes float{
+  from{transform:translateY(110vh) scale(.8)}
+  to{transform:translateY(-20vh) scale(1.4)}
 }
 
 /* CANVAS */
@@ -29,27 +41,86 @@ header h1{
   text-shadow:0 0 18px #fff,0 0 36px #ff4d6d;
 }
 
-/* LOCK */
+/* ===== LOCK SCREEN ===== */
 .lock{
   position:fixed;inset:0;
-  display:flex;align-items:center;justify-content:center;
-  z-index:5;background:#ffd6df;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:5;
+  backdrop-filter:blur(10px);
 }
-.lock-box{
-  background:white;padding:30px;border-radius:20px;
-  width:260px;text-align:center;
-  box-shadow:0 20px 40px rgba(0,0,0,.3);
+
+/* 3D CARD */
+.lock-card{
+  width:300px;
+  padding:36px 28px;
+  border-radius:26px;
+  background:rgba(255,255,255,.25);
+  backdrop-filter:blur(18px);
+  box-shadow:
+    0 40px 80px rgba(255,0,80,.35),
+    inset 0 0 40px rgba(255,255,255,.3);
+  text-align:center;
+  transform-style:preserve-3d;
+  animation:floatCard 6s ease-in-out infinite;
 }
-.lock-box h3{margin-bottom:12px;color:#ff3b6f}
-.lock-box input{
-  width:100%;padding:12px;border-radius:12px;
-  border:2px solid #ff8fab;font-size:18px;text-align:center
+@keyframes floatCard{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-10px)}
 }
-.lock-box button{
-  margin-top:12px;padding:12px;width:100%;
-  border:none;border-radius:14px;
-  background:#ff5c8a;color:white;font-size:16px;cursor:pointer
+
+/* HEART ICON */
+.lock-heart{
+  font-size:56px;
+  margin-bottom:16px;
+  filter:drop-shadow(0 0 18px #ff4d6d);
+  animation:pulse 1.2s infinite;
 }
+@keyframes pulse{
+  50%{transform:scale(1.25)}
+}
+
+/* TITLE */
+.lock-card h3{
+  color:#ff2f6e;
+  margin-bottom:20px;
+  text-shadow:0 0 14px rgba(255,80,120,.9);
+}
+
+/* INPUT */
+.lock-card input{
+  width:100%;
+  padding:14px;
+  border-radius:16px;
+  border:none;
+  outline:none;
+  font-size:20px;
+  text-align:center;
+  background:rgba(255,255,255,.6);
+  box-shadow:inset 0 0 12px rgba(255,0,90,.3);
+}
+
+/* BUTTON */
+.lock-card button{
+  margin-top:18px;
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:18px;
+  background:linear-gradient(135deg,#ff5c8a,#ff2f6e);
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+  box-shadow:0 12px 30px rgba(255,0,80,.5);
+  transition:.3s;
+}
+.lock-card button:hover{
+  transform:translateY(-2px);
+  box-shadow:0 18px 40px rgba(255,0,80,.7);
+}
+
+/* SHAKE */
 .shake{animation:shake .4s}
 @keyframes shake{
   25%{transform:translateX(-6px)}
@@ -85,12 +156,8 @@ header h1{
   filter:drop-shadow(0 0 10px rgba(255,80,120,.8));
 }
 @keyframes fly{
-  from{
-    transform:translate(0,0) scale(1);
-    opacity:1;
-  }
   to{
-    transform:translate(var(--x),var(--y)) scale(.6) rotate(20deg);
+    transform:translate(var(--x),var(--y)) scale(.6);
     opacity:0;
   }
 }
@@ -115,16 +182,6 @@ header h1{
 .card h2{
   color:#ff3b6f;
   margin-bottom:12px;
-  text-shadow:0 0 14px rgba(255,80,120,.9);
-}
-.card p{line-height:1.7}
-
-/* IMAGES */
-.col{display:flex;flex-direction:column;gap:20px}
-.col img{
-  width:160px;height:220px;
-  object-fit:cover;border-radius:20px;
-  box-shadow:0 20px 40px rgba(0,0,0,.3)
 }
 </style>
 </head>
@@ -137,10 +194,24 @@ header h1{
   <h1>💘 Happy Valentine Bé iu 💘</h1>
 </header>
 
+<!-- FLOATING HEART BACKGROUND -->
+<script>
+for(let i=0;i<18;i++){
+  const h=document.createElement("div");
+  h.className="bg-heart";
+  h.textContent="💗";
+  h.style.left=Math.random()*100+"%";
+  h.style.animationDelay=Math.random()*10+"s";
+  h.style.fontSize=16+Math.random()*30+"px";
+  document.body.appendChild(h);
+}
+</script>
+
 <!-- LOCK -->
 <div class="lock" id="lock">
-  <div class="lock-box" id="lockBox">
-    <h3>🔐 Nhập mật khẩu</h3>
+  <div class="lock-card" id="lockBox">
+    <div class="lock-heart">💖</div>
+    <h3>Mở khóa yêu thương</h3>
     <input type="password" id="pass" placeholder="••••">
     <button onclick="unlock()">Mở khóa 💝</button>
   </div>
@@ -151,115 +222,19 @@ header h1{
   <div class="heart-core" id="heart">💖</div>
 </div>
 
-<!-- CONTENT -->
-<div class="content" id="content">
-  <div class="col">
-    <img src="cbb9b857-25ea-4678-a2ce-e0a156cad680.jfif">
-    <img src="189eba2b-739c-4f82-8ea3-9194b14b9179.jfif">
-  </div>
-
-  <div class="card">
-    <h2>💖 Gửi Bé iu 💖</h2>
-    <p id="typing"></p>
-  </div>
-
-  <div class="col">
-    <img src="2ed21c0b-e1d3-453b-b756-dcd542fea547.jfif">
-    <img src="415e4240-2d65-4a22-b29e-b82f6db391f0.jfif">
-  </div>
-</div>
-
 <script>
-/* FIREWORK */
-const c=document.getElementById("fire"),ctx=c.getContext("2d");
-let W,H,ps=[];
-function resize(){W=c.width=innerWidth;H=c.height=innerHeight}
-resize();addEventListener("resize",resize);
-
-function boom(x,y){
-  for(let i=0;i<70;i++){
-    ps.push({
-      x,y,
-      vx:(Math.random()-.5)*5,
-      vy:(Math.random()-.5)*5,
-      life:80
-    });
-  }
-}
-(function anim(){
-  ctx.fillStyle="rgba(0,0,0,0.2)";
-  ctx.fillRect(0,0,W,H);
-  for(let i=ps.length-1;i>=0;i--){
-    const p=ps[i];
-    p.x+=p.vx;p.y+=p.vy;p.life--;
-    ctx.fillStyle=`rgba(255,80,120,${p.life/80})`;
-    ctx.beginPath();ctx.arc(p.x,p.y,3,0,Math.PI*2);ctx.fill();
-    if(p.life<=0)ps.splice(i,1);
-  }
-  requestAnimationFrame(anim);
-})();
-
 /* UNLOCK */
 function unlock(){
   if(pass.value==="0502"){
-    lock.style.display="none";
-    center.style.display="flex";
+    lock.style.opacity=0;
+    setTimeout(()=>{
+      lock.style.display="none";
+      center.style.display="flex";
+    },500);
   }else{
     lockBox.classList.add("shake");
     setTimeout(()=>lockBox.classList.remove("shake"),400);
     pass.value="";
-  }
-}
-
-/* HEART BREAK → PARTICLES */
-let beats=0;
-const heart=document.getElementById("heart");
-const beatTimer=setInterval(()=>{
-  beats++;
-  if(beats===3){
-    clearInterval(beatTimer);
-    heart.style.display="none";
-    createHeartParticles();
-    boom(W/2,H/2);
-    setTimeout(()=>{
-      center.style.display="none";
-      content.style.display="flex";
-      typeText();
-    },900);
-  }
-},1000);
-
-function createHeartParticles(){
-  for(let i=0;i<22;i++){
-    const h=document.createElement("div");
-    h.className="heart-particle";
-    h.textContent="💖";
-    h.style.left="50%";
-    h.style.top="45%";
-    h.style.setProperty("--x",(Math.random()*260-130)+"px");
-    h.style.setProperty("--y",(-200-Math.random()*160)+"px");
-    document.body.appendChild(h);
-    setTimeout(()=>h.remove(),2600);
-  }
-}
-
-/* TYPING */
-const text=`Valentine này anh chúc bé iu luôn vui vẻ,
-luôn cười thật tươi và lúc nào cũng cảm thấy được yêu thương.
-
-Cảm ơn bé iu vì đã xuất hiện
-và làm những ngày của anh trở nên đặc biệt hơn.
-
-Mong rằng không chỉ Valentine này,
-mà rất nhiều Valentine sau nữa,
-anh vẫn được ở cạnh bé iu 💕`;
-
-let i=0;
-function typeText(){
-  if(i<text.length){
-    typing.innerHTML+=text[i]==="\n"?"<br>":text[i];
-    i++;
-    setTimeout(typeText,38);
   }
 }
 </script>
