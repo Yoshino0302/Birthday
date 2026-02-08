@@ -6,37 +6,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:'Segoe UI',sans-serif
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
 body{
   height:100vh;
-  background:linear-gradient(#ff9aaf,#ffd6df);
+  background:radial-gradient(circle at top,#ffd6df,#ff9aaf);
   overflow:hidden;
 }
 
 /* CANVAS */
-canvas{
-  position:fixed;
-  inset:0;
-  z-index:0;
-}
-
-/* HEART FLOAT */
-.heart{
-  position:fixed;
-  bottom:-20px;
-  animation:float 6s linear forwards;
-  z-index:1;
-  will-change:transform,opacity;
-}
-@keyframes float{
-  from{transform:translateY(0);opacity:1}
-  to{transform:translateY(-120vh);opacity:0}
-}
+canvas{position:fixed;inset:0;z-index:0}
 
 /* HEADER */
 header{
@@ -48,108 +26,73 @@ header{
 }
 header h1{
   font-size:28px;
-  text-shadow:0 0 12px #fff,0 0 24px #ff4d6d;
+  text-shadow:0 0 16px #fff,0 0 32px #ff4d6d;
 }
 
 /* LOCK */
 .lock{
-  position:fixed;
-  inset:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  z-index:5;
-  background:#ffd6df;
+  position:fixed;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  z-index:5;background:#ffd6df;
 }
 .lock-box{
-  background:white;
-  padding:30px;
-  border-radius:20px;
-  width:260px;
-  text-align:center;
+  background:white;padding:30px;border-radius:20px;
+  width:260px;text-align:center;
   box-shadow:0 20px 40px rgba(0,0,0,.3);
 }
-.lock-box h3{
-  margin-bottom:12px;
-  color:#ff3b6f;
-}
+.lock-box h3{margin-bottom:12px;color:#ff3b6f}
 .lock-box input{
-  width:100%;
-  padding:12px;
-  border-radius:12px;
-  border:2px solid #ff8fab;
-  font-size:18px;
-  text-align:center;
-  outline:none;
+  width:100%;padding:12px;border-radius:12px;
+  border:2px solid #ff8fab;font-size:18px;text-align:center
 }
 .lock-box button{
-  margin-top:12px;
-  padding:12px;
-  width:100%;
-  border:none;
-  border-radius:14px;
-  background:#ff5c8a;
-  color:white;
-  font-size:16px;
-  cursor:pointer;
+  margin-top:12px;padding:12px;width:100%;
+  border:none;border-radius:14px;
+  background:#ff5c8a;color:white;font-size:16px;cursor:pointer
 }
 .shake{animation:shake .4s}
 @keyframes shake{
-  0%,100%{transform:translateX(0)}
   25%{transform:translateX(-6px)}
   75%{transform:translateX(6px)}
 }
 
-/* GIFT */
+/* CENTER AREA */
 .center{
-  position:fixed;
-  inset:0;
-  display:none;
-  align-items:center;
-  justify-content:center;
+  position:fixed;inset:0;
+  display:none;align-items:center;justify-content:center;
   z-index:3;
+  transform:scale(1);
+  transition:transform 1.5s cubic-bezier(.2,.8,.2,1);
 }
-.gift{
-  width:140px;
-  height:140px;
-  position:relative;
-  cursor:pointer;
-  animation:giftShake 2s infinite;
+.center.zoom{transform:scale(1.25)}
+
+/* HEART BEAT */
+.heart-core{
+  font-size:120px;
+  animation:beat 1s ease-in-out infinite;
+  filter:drop-shadow(0 0 20px #ff4d6d);
 }
-@keyframes giftShake{
-  0%,100%{transform:rotate(0)}
-  25%{transform:rotate(2deg)}
-  75%{transform:rotate(-2deg)}
+@keyframes beat{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.25)}
 }
-.box{
-  width:100%;
-  height:100%;
-  background:#ff5c8a;
-  border-radius:16px;
-}
+
+/* GIFT */
+.gift{position:absolute;bottom:80px;width:120px;height:120px;cursor:pointer}
+.box{width:100%;height:100%;background:#ff5c8a;border-radius:16px}
 .lid{
-  position:absolute;
-  top:-22px;
-  width:100%;
-  height:40px;
-  background:#ff8fab;
-  border-radius:16px;
-  transform-origin:bottom;
-  transition:.8s;
+  position:absolute;top:-22px;width:100%;height:40px;
+  background:#ff8fab;border-radius:16px;
+  transform-origin:bottom;transition:.8s
 }
-.open .lid{
-  transform:rotateX(110deg) translateY(-30px);
-}
+.open .lid{transform:rotateX(110deg) translateY(-30px)}
 .flash{
-  position:absolute;
-  inset:-80px;
+  position:absolute;inset:-100px;
   background:radial-gradient(circle,#fff,transparent 60%);
-  animation:flash 1s;
+  animation:flash 1s
 }
 @keyframes flash{
-  0%{opacity:0}
-  30%{opacity:1}
-  100%{opacity:0}
+  0%{opacity:0}30%{opacity:1}100%{opacity:0}
 }
 
 /* CONTENT */
@@ -162,32 +105,30 @@ header h1{
   justify-content:center;
 }
 .card{
-  background:white;
-  padding:24px;
-  border-radius:20px;
-  width:320px;
-  text-align:center;
+  background:white;padding:24px;border-radius:20px;
+  width:320px;text-align:center;
+  box-shadow:0 20px 40px rgba(0,0,0,.25);
 }
 .card h2{
-  color:#ff3b6f;
-  margin-bottom:10px;
+  color:#ff3b6f;margin-bottom:12px;
+  text-shadow:0 0 12px rgba(255,80,120,.8);
 }
 .card p{
-  line-height:1.6;
+  line-height:1.7;
+  min-height:140px;
+}
+.glow{animation:glow 2s infinite alternate}
+@keyframes glow{
+  from{text-shadow:0 0 6px #ff8fab}
+  to{text-shadow:0 0 18px #ff4d6d}
 }
 
 /* IMAGES */
-.col{
-  display:flex;
-  flex-direction:column;
-  gap:20px;
-}
+.col{display:flex;flex-direction:column;gap:20px}
 .col img{
-  width:160px;
-  height:220px;
-  object-fit:cover;
+  width:160px;height:220px;object-fit:cover;
   border-radius:20px;
-  box-shadow:0 20px 40px rgba(0,0,0,.3);
+  box-shadow:0 20px 40px rgba(0,0,0,.3)
 }
 </style>
 </head>
@@ -209,8 +150,10 @@ header h1{
   </div>
 </div>
 
-<!-- GIFT -->
-<div class="center" id="giftArea">
+<!-- CENTER -->
+<div class="center" id="center">
+  <div class="heart-core" id="heart">💖</div>
+
   <div class="gift" id="gift">
     <div class="lid"></div>
     <div class="box"></div>
@@ -225,13 +168,8 @@ header h1{
   </div>
 
   <div class="card">
-    <h2>💖 Gửi Bé iu 💖</h2>
-    <p>
-      Valentine này anh chúc bé iu luôn vui vẻ, luôn cười thật tươi và lúc nào cũng cảm thấy được yêu thương.<br><br>
-      Cảm ơn bé iu vì đã xuất hiện và làm những ngày của anh trở nên đặc biệt hơn.<br><br>
-      Mong rằng không chỉ Valentine này, mà rất nhiều Valentine sau nữa,
-      anh vẫn được ở cạnh bé iu 💕
-    </p>
+    <h2 class="glow">💖 Gửi Bé iu 💖</h2>
+    <p id="typing"></p>
   </div>
 
   <div class="col">
@@ -241,95 +179,88 @@ header h1{
 </div>
 
 <script>
-/* ========= FIREWORK ========= */
-const canvas=document.getElementById("fire");
-const ctx=canvas.getContext("2d");
-let W,H,particles=[];
-
-function resize(){
-  W=canvas.width=innerWidth;
-  H=canvas.height=innerHeight;
-}
-resize();
-addEventListener("resize",resize);
+/* FIREWORK */
+const c=document.getElementById("fire"),ctx=c.getContext("2d");
+let W,H,ps=[];
+function resize(){W=c.width=innerWidth;H=c.height=innerHeight}
+resize();addEventListener("resize",resize);
 
 function boom(x,y){
-  for(let i=0;i<60;i++){
-    particles.push({
-      x,y,
-      vx:(Math.random()-0.5)*5,
-      vy:(Math.random()-0.5)*5,
-      life:80
-    });
+  for(let i=0;i<80;i++){
+    ps.push({x,y,
+      vx:(Math.random()-.5)*6,
+      vy:(Math.random()-.5)*6,
+      life:90})
   }
 }
-
-function animate(){
-  ctx.fillStyle="rgba(0,0,0,0.15)";
+(function anim(){
+  ctx.fillStyle="rgba(0,0,0,0.18)";
   ctx.fillRect(0,0,W,H);
-
-  for(let i=particles.length-1;i>=0;i--){
-    const p=particles[i];
-    p.x+=p.vx;
-    p.y+=p.vy;
-    p.life--;
-
-    ctx.fillStyle=`rgba(255,80,120,${p.life/80})`;
-    ctx.beginPath();
-    ctx.arc(p.x,p.y,3,0,Math.PI*2);
-    ctx.fill();
-
-    if(p.life<=0)particles.splice(i,1);
+  for(let i=ps.length-1;i>=0;i--){
+    const p=ps[i];
+    p.x+=p.vx;p.y+=p.vy;p.life--;
+    ctx.fillStyle=`rgba(255,80,120,${p.life/90})`;
+    ctx.beginPath();ctx.arc(p.x,p.y,3,0,Math.PI*2);ctx.fill();
+    if(p.life<=0)ps.splice(i,1);
   }
-  requestAnimationFrame(animate);
-}
-animate();
-setInterval(()=>boom(Math.random()*W,Math.random()*H*0.4),1200);
+  requestAnimationFrame(anim);
+})();
+setInterval(()=>boom(Math.random()*W,Math.random()*H*.4),1400);
 
-/* ========= HEART ========= */
-let heartCount=0;
-setInterval(()=>{
-  if(heartCount>20)return;
-  heartCount++;
-
-  const h=document.createElement("div");
-  h.className="heart";
-  h.textContent="💖";
-  h.style.left=Math.random()*100+"vw";
-  h.style.fontSize=14+Math.random()*18+"px";
-  document.body.appendChild(h);
-
-  setTimeout(()=>{
-    h.remove();
-    heartCount--;
-  },6000);
-},500);
-
-/* ========= UNLOCK ========= */
+/* UNLOCK */
 function unlock(){
-  const p=document.getElementById("pass");
-  if(p.value==="0502"){
+  if(pass.value==="0502"){
     lock.style.display="none";
-    giftArea.style.display="flex";
+    center.style.display="flex";
   }else{
     lockBox.classList.add("shake");
     setTimeout(()=>lockBox.classList.remove("shake"),400);
-    p.value="";
+    pass.value="";
   }
 }
 
-/* ========= GIFT ========= */
-const gift=document.getElementById("gift");
+/* HEART BEAT → BREAK */
+let beats=0;
+const heart=document.getElementById("heart");
+const beatTimer=setInterval(()=>{
+  beats++;
+  if(beats===3){
+    clearInterval(beatTimer);
+    heart.style.display="none";
+    boom(W/2,H/2);
+  }
+},1000);
+
+/* GIFT + CINEMATIC */
 gift.onclick=()=>{
   gift.classList.add("open");
   gift.insertAdjacentHTML("beforeend","<div class='flash'></div>");
+  center.classList.add("zoom");
   boom(W/2,H/2);
 
   setTimeout(()=>{
-    giftArea.style.display="none";
+    center.style.display="none";
     content.style.display="flex";
-  },900);
+    typeText();
+  },1200);
 };
+
+/* TYPING */
+const text=`Valentine này anh chúc bé iu luôn vui vẻ, luôn cười thật tươi
+và lúc nào cũng cảm thấy được yêu thương.\n\n
+Cảm ơn bé iu vì đã xuất hiện và làm những ngày của anh trở nên đặc biệt hơn.\n\n
+Mong rằng không chỉ Valentine này,
+mà rất nhiều Valentine sau nữa,
+anh vẫn được ở cạnh bé iu 💕`;
+
+let i=0;
+function typeText(){
+  if(i<text.length){
+    typing.innerHTML+=text[i]==="\n"?"<br>":text[i];
+    i++;
+    setTimeout(typeText,40);
+  }
+}
 </script>
 
 </body>
