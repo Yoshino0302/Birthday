@@ -2,16 +2,15 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>💖 For My Love 💖</title>
+<title>💘 Happy Valentine Bé iu 💘</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
 body{
   height:100vh;
+  background:radial-gradient(circle at top,#ffe1e8,#ff9aaf);
   overflow:hidden;
-  background:radial-gradient(circle at top,#2a0d17,#050006);
-  transition:background 2s;
 }
 
 /* CANVAS */
@@ -20,23 +19,26 @@ canvas{position:fixed;inset:0;z-index:0}
 /* HEADER */
 header{
   position:relative;
-  z-index:3;
-  padding:20px;
+  z-index:2;
+  padding:24px;
   text-align:center;
-  color:#ffd6df;
-  text-shadow:0 0 20px #ff4d6d;
+  color:white;
+}
+header h1{
+  font-size:28px;
+  text-shadow:0 0 18px #fff,0 0 36px #ff4d6d;
 }
 
 /* LOCK */
 .lock{
   position:fixed;inset:0;
   display:flex;align-items:center;justify-content:center;
-  z-index:10;background:#ffd6df;
+  z-index:5;background:#ffd6df;
 }
 .lock-box{
-  background:white;padding:28px;border-radius:18px;
+  background:white;padding:30px;border-radius:20px;
   width:260px;text-align:center;
-  box-shadow:0 20px 50px rgba(0,0,0,.4);
+  box-shadow:0 20px 40px rgba(0,0,0,.3);
 }
 .lock-box h3{margin-bottom:12px;color:#ff3b6f}
 .lock-box input{
@@ -48,6 +50,11 @@ header{
   border:none;border-radius:14px;
   background:#ff5c8a;color:white;font-size:16px;cursor:pointer
 }
+.shake{animation:shake .4s}
+@keyframes shake{
+  25%{transform:translateX(-6px)}
+  75%{transform:translateX(6px)}
+}
 
 /* CENTER */
 .center{
@@ -55,71 +62,69 @@ header{
   display:none;
   align-items:center;
   justify-content:center;
-  z-index:2;
-  transform:scale(1);
-  transition:transform 2s cubic-bezier(.2,.8,.2,1);
+  z-index:3;
 }
-.center.zoom{transform:scale(1.35)}
 
 /* HEART CORE */
 .heart-core{
   font-size:120px;
-  animation:beat 1.2s ease-in-out infinite;
-  filter:drop-shadow(0 0 40px #ff4d6d);
+  animation:beat 1s ease-in-out infinite;
+  filter:drop-shadow(0 0 25px #ff4d6d);
 }
 @keyframes beat{
   0%,100%{transform:scale(1)}
-  50%{transform:scale(1.35)}
+  50%{transform:scale(1.3)}
 }
 
 /* HEART PARTICLES */
-.heart-p{
+.heart-particle{
   position:fixed;
-  font-size:20px;
+  font-size:22px;
   pointer-events:none;
-  filter:drop-shadow(0 0 12px #ff5c8a);
-  animation:fly 3.5s ease-out forwards;
+  animation:fly 2.6s ease-out forwards;
+  filter:drop-shadow(0 0 10px rgba(255,80,120,.8));
 }
 @keyframes fly{
-  from{opacity:1;transform:translate(0,0) scale(1)}
-  to{opacity:0;transform:translate(var(--x),var(--y)) scale(.5) rotate(25deg)}
+  from{
+    transform:translate(0,0) scale(1);
+    opacity:1;
+  }
+  to{
+    transform:translate(var(--x),var(--y)) scale(.6) rotate(20deg);
+    opacity:0;
+  }
 }
 
 /* CONTENT */
 .content{
   display:none;
   position:relative;
-  z-index:3;
+  z-index:2;
   padding:40px;
   gap:30px;
   justify-content:center;
 }
 .card{
-  background:rgba(255,255,255,.08);
-  backdrop-filter:blur(10px);
-  padding:28px;
-  border-radius:22px;
-  width:340px;
+  background:white;
+  padding:24px;
+  border-radius:20px;
+  width:320px;
   text-align:center;
-  color:#ffd6df;
-  box-shadow:0 30px 60px rgba(0,0,0,.6);
+  box-shadow:0 20px 40px rgba(0,0,0,.25);
 }
 .card h2{
-  margin-bottom:14px;
-  color:#ff9ab3;
-  text-shadow:0 0 20px #ff4d6d;
+  color:#ff3b6f;
+  margin-bottom:12px;
+  text-shadow:0 0 14px rgba(255,80,120,.9);
 }
-.card p{
-  line-height:1.8;
-  min-height:180px;
-}
+.card p{line-height:1.7}
 
 /* IMAGES */
 .col{display:flex;flex-direction:column;gap:20px}
 .col img{
   width:160px;height:220px;
   object-fit:cover;border-radius:20px;
-  box-shadow:0 30px 60px rgba(0,0,0,.6)
+  box-shadow:0 20px 40px rgba(0,0,0,.3)
 }
 </style>
 </head>
@@ -129,15 +134,15 @@ header{
 <canvas id="fire"></canvas>
 
 <header>
-  <h1>💖 Happy Valentine 💖</h1>
+  <h1>💘 Happy Valentine Bé iu 💘</h1>
 </header>
 
 <!-- LOCK -->
 <div class="lock" id="lock">
-  <div class="lock-box">
-    <h3>🔐 Mật khẩu</h3>
-    <input type="password" id="pass">
-    <button onclick="unlock()">Mở 💝</button>
+  <div class="lock-box" id="lockBox">
+    <h3>🔐 Nhập mật khẩu</h3>
+    <input type="password" id="pass" placeholder="••••">
+    <button onclick="unlock()">Mở khóa 💝</button>
   </div>
 </div>
 
@@ -149,20 +154,20 @@ header{
 <!-- CONTENT -->
 <div class="content" id="content">
   <div class="col">
-    <img src="1.jpg"><img src="2.jpg">
+    <img src="cbb9b857-25ea-4678-a2ce-e0a156cad680.jfif">
+    <img src="189eba2b-739c-4f82-8ea3-9194b14b9179.jfif">
   </div>
+
   <div class="card">
-    <h2>💖 Gửi em 💖</h2>
+    <h2>💖 Gửi Bé iu 💖</h2>
     <p id="typing"></p>
   </div>
+
   <div class="col">
-    <img src="3.jpg"><img src="4.jpg">
+    <img src="2ed21c0b-e1d3-453b-b756-dcd542fea547.jfif">
+    <img src="415e4240-2d65-4a22-b29e-b82f6db391f0.jfif">
   </div>
 </div>
-
-<audio id="music" loop>
-  <source src="music.mp3" type="audio/mpeg">
-</audio>
 
 <script>
 /* FIREWORK */
@@ -172,18 +177,24 @@ function resize(){W=c.width=innerWidth;H=c.height=innerHeight}
 resize();addEventListener("resize",resize);
 
 function boom(x,y){
-  for(let i=0;i<60;i++)
-    ps.push({x,y,vx:(Math.random()-.5)*4,vy:(Math.random()-.5)*4,l:90});
+  for(let i=0;i<70;i++){
+    ps.push({
+      x,y,
+      vx:(Math.random()-.5)*5,
+      vy:(Math.random()-.5)*5,
+      life:80
+    });
+  }
 }
 (function anim(){
-  ctx.fillStyle="rgba(0,0,0,.25)";
+  ctx.fillStyle="rgba(0,0,0,0.2)";
   ctx.fillRect(0,0,W,H);
   for(let i=ps.length-1;i>=0;i--){
-    let p=ps[i];
-    p.x+=p.vx;p.y+=p.vy;p.l--;
-    ctx.fillStyle=`rgba(255,80,120,${p.l/90})`;
+    const p=ps[i];
+    p.x+=p.vx;p.y+=p.vy;p.life--;
+    ctx.fillStyle=`rgba(255,80,120,${p.life/80})`;
     ctx.beginPath();ctx.arc(p.x,p.y,3,0,Math.PI*2);ctx.fill();
-    if(p.l<=0)ps.splice(i,1);
+    if(p.life<=0)ps.splice(i,1);
   }
   requestAnimationFrame(anim);
 })();
@@ -193,76 +204,62 @@ function unlock(){
   if(pass.value==="0502"){
     lock.style.display="none";
     center.style.display="flex";
-  }else pass.value="";
-}
-
-/* HEART BEAT → FINAL BREAK */
-let beat=0;
-const heart=document.getElementById("heart");
-const timer=setInterval(()=>{
-  beat++;
-  if(beat===3){
-    clearInterval(timer);
-    heart.remove();
-    cinematic();
+  }else{
+    lockBox.classList.add("shake");
+    setTimeout(()=>lockBox.classList.remove("shake"),400);
+    pass.value="";
   }
-},1200);
-
-function cinematic(){
-  center.classList.add("zoom");
-  createHeartCurve();
-  boom(W/2,H/2);
-  music.volume=0;
-  music.play();
-  let v=0;
-  const fade=setInterval(()=>{
-    v+=.05;music.volume=v;
-    if(v>=1)clearInterval(fade);
-  },120);
-
-  setTimeout(()=>{
-    center.style.display="none";
-    content.style.display="flex";
-    typeText();
-  },2500);
 }
 
-/* HEART CURVE */
-function createHeartCurve(){
-  for(let t=0;t<Math.PI*2;t+=0.15){
-    const x=16*Math.pow(Math.sin(t),3);
-    const y=-(13*Math.cos(t)-5*Math.cos(2*t)-2*Math.cos(3*t)-Math.cos(4*t));
+/* HEART BREAK → PARTICLES */
+let beats=0;
+const heart=document.getElementById("heart");
+const beatTimer=setInterval(()=>{
+  beats++;
+  if(beats===3){
+    clearInterval(beatTimer);
+    heart.style.display="none";
+    createHeartParticles();
+    boom(W/2,H/2);
+    setTimeout(()=>{
+      center.style.display="none";
+      content.style.display="flex";
+      typeText();
+    },900);
+  }
+},1000);
+
+function createHeartParticles(){
+  for(let i=0;i<22;i++){
     const h=document.createElement("div");
-    h.className="heart-p";
+    h.className="heart-particle";
     h.textContent="💖";
     h.style.left="50%";
     h.style.top="45%";
-    h.style.setProperty("--x",x*12+"px");
-    h.style.setProperty("--y",y*12+"px");
+    h.style.setProperty("--x",(Math.random()*260-130)+"px");
+    h.style.setProperty("--y",(-200-Math.random()*160)+"px");
     document.body.appendChild(h);
-    setTimeout(()=>h.remove(),3500);
+    setTimeout(()=>h.remove(),2600);
   }
 }
 
 /* TYPING */
-const text=`Anh không biết từ khi nào,
-nhưng có em rồi
-mọi thứ đều trở nên dịu dàng hơn.
+const text=`Valentine này anh chúc bé iu luôn vui vẻ,
+luôn cười thật tươi và lúc nào cũng cảm thấy được yêu thương.
 
-Cảm ơn em vì đã đến,
-và ở lại.
+Cảm ơn bé iu vì đã xuất hiện
+và làm những ngày của anh trở nên đặc biệt hơn.
 
-Chỉ mong rằng
-mỗi Valentine sau này,
-người anh nắm tay
-vẫn là em 💕`;
+Mong rằng không chỉ Valentine này,
+mà rất nhiều Valentine sau nữa,
+anh vẫn được ở cạnh bé iu 💕`;
 
 let i=0;
 function typeText(){
   if(i<text.length){
     typing.innerHTML+=text[i]==="\n"?"<br>":text[i];
     i++;
-    setTimeout(typeText,45);
+    setTimeout(typeText,38);
   }
 }
 </script>
