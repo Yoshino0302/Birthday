@@ -6,7 +6,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI',sans-serif
+}
 body{
   height:100vh;
   background:linear-gradient(#ff9aaf,#ffd6df);
@@ -24,9 +29,9 @@ canvas{
 .heart{
   position:fixed;
   bottom:-20px;
-  font-size:18px;
-  animation:float 6s linear infinite;
+  animation:float 6s linear forwards;
   z-index:1;
+  will-change:transform,opacity;
 }
 @keyframes float{
   from{transform:translateY(0);opacity:1}
@@ -46,7 +51,7 @@ header h1{
   text-shadow:0 0 12px #fff,0 0 24px #ff4d6d;
 }
 
-/* LOCK SCREEN */
+/* LOCK */
 .lock{
   position:fixed;
   inset:0;
@@ -88,9 +93,7 @@ header h1{
   font-size:16px;
   cursor:pointer;
 }
-.shake{
-  animation:shake .4s;
-}
+.shake{animation:shake .4s}
 @keyframes shake{
   0%,100%{transform:translateX(0)}
   25%{transform:translateX(-6px)}
@@ -131,8 +134,8 @@ header h1{
   height:40px;
   background:#ff8fab;
   border-radius:16px;
-  transition:.8s;
   transform-origin:bottom;
+  transition:.8s;
 }
 .open .lid{
   transform:rotateX(110deg) translateY(-30px);
@@ -144,9 +147,9 @@ header h1{
   animation:flash 1s;
 }
 @keyframes flash{
-  from{opacity:0}
+  0%{opacity:0}
   30%{opacity:1}
-  to{opacity:0}
+  100%{opacity:0}
 }
 
 /* CONTENT */
@@ -155,8 +158,8 @@ header h1{
   position:relative;
   z-index:2;
   padding:40px;
-  justify-content:center;
   gap:30px;
+  justify-content:center;
 }
 .card{
   background:white;
@@ -238,71 +241,93 @@ header h1{
 </div>
 
 <script>
-/* FIREWORK */
-const c=document.getElementById("fire"),ctx=c.getContext("2d");
-function resize(){c.width=innerWidth;c.height=innerHeight}
-resize();onresize=resize;
-let ps=[];
+/* ========= FIREWORK ========= */
+const canvas=document.getElementById("fire");
+const ctx=canvas.getContext("2d");
+let W,H,particles=[];
+
+function resize(){
+  W=canvas.width=innerWidth;
+  H=canvas.height=innerHeight;
+}
+resize();
+addEventListener("resize",resize);
+
 function boom(x,y){
-  for(let i=0;i<80;i++){
-    ps.push({
+  for(let i=0;i<60;i++){
+    particles.push({
       x,y,
-      vx:(Math.random()-.5)*6,
-      vy:(Math.random()-.5)*6,
-      l:100
+      vx:(Math.random()-0.5)*5,
+      vy:(Math.random()-0.5)*5,
+      life:80
     });
   }
 }
-(function draw(){
-  ctx.clearRect(0,0,c.width,c.height);
-  ps.forEach((p,i)=>{
+
+function animate(){
+  ctx.fillStyle="rgba(0,0,0,0.15)";
+  ctx.fillRect(0,0,W,H);
+
+  for(let i=particles.length-1;i>=0;i--){
+    const p=particles[i];
     p.x+=p.vx;
     p.y+=p.vy;
-    p.l--;
-    ctx.fillStyle=`rgba(255,80,120,${p.l/100})`;
+    p.life--;
+
+    ctx.fillStyle=`rgba(255,80,120,${p.life/80})`;
     ctx.beginPath();
     ctx.arc(p.x,p.y,3,0,Math.PI*2);
     ctx.fill();
-    if(p.l<=0)ps.splice(i,1);
-  });
-  requestAnimationFrame(draw);
-})();
-setInterval(()=>boom(Math.random()*c.width,Math.random()*c.height/2),900);
 
-/* HEART */
+    if(p.life<=0)particles.splice(i,1);
+  }
+  requestAnimationFrame(animate);
+}
+animate();
+setInterval(()=>boom(Math.random()*W,Math.random()*H*0.4),1200);
+
+/* ========= HEART ========= */
+let heartCount=0;
 setInterval(()=>{
-  let h=document.createElement("div");
+  if(heartCount>20)return;
+  heartCount++;
+
+  const h=document.createElement("div");
   h.className="heart";
   h.textContent="💖";
   h.style.left=Math.random()*100+"vw";
-  h.style.fontSize=14+Math.random()*20+"px";
+  h.style.fontSize=14+Math.random()*18+"px";
   document.body.appendChild(h);
-  setTimeout(()=>h.remove(),6000);
-},400);
 
-/* UNLOCK */
+  setTimeout(()=>{
+    h.remove();
+    heartCount--;
+  },6000);
+},500);
+
+/* ========= UNLOCK ========= */
 function unlock(){
   const p=document.getElementById("pass");
   if(p.value==="0502"){
-    document.getElementById("lock").style.display="none";
-    document.getElementById("giftArea").style.display="flex";
+    lock.style.display="none";
+    giftArea.style.display="flex";
   }else{
-    const b=document.getElementById("lockBox");
-    b.classList.add("shake");
-    setTimeout(()=>b.classList.remove("shake"),400);
+    lockBox.classList.add("shake");
+    setTimeout(()=>lockBox.classList.remove("shake"),400);
     p.value="";
   }
 }
 
-/* GIFT OPEN */
+/* ========= GIFT ========= */
 const gift=document.getElementById("gift");
 gift.onclick=()=>{
   gift.classList.add("open");
   gift.insertAdjacentHTML("beforeend","<div class='flash'></div>");
-  boom(innerWidth/2,innerHeight/2);
+  boom(W/2,H/2);
+
   setTimeout(()=>{
-    document.getElementById("giftArea").style.display="none";
-    document.getElementById("content").style.display="flex";
+    giftArea.style.display="none";
+    content.style.display="flex";
   },900);
 };
 </script>
