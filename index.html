@@ -2,194 +2,261 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>💘 Valentine 💘</title>
+<title>💘 Valentine Romantic Cinema 💘</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-/* ===== BASE (GIỮ NGUYÊN) ===== */
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
-body{
-  height:100vh;
-  background:radial-gradient(circle at top,#ffe6ec,#ff9bb3);
-  overflow:hidden;
+/* ===== BASE (MODERNIZED) ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+body {
+  height: 100vh;
+  background: radial-gradient(circle at top, #ffe6ec, #ff9bb3);
+  overflow: hidden;
+  perspective: 1000px; /* 3D perspective for cinematic feel */
+  transform-style: preserve-3d;
 }
 
-/* BACKGROUND LIGHT */
-.light{
-  position:fixed;
-  width:6px;height:6px;
-  background:radial-gradient(circle,#fff,transparent);
-  animation:float 6s linear infinite;
-  opacity:.6;
+/* BACKGROUND LIGHTS WITH 3D GLOW */
+.light {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  background: radial-gradient(circle, #fff, transparent);
+  animation: float 8s linear infinite;
+  opacity: 0.8;
+  box-shadow: 0 0 20px rgba(255, 80, 120, 0.6); /* Volumetric glow */
+  transform: translateZ(0); /* Force hardware acceleration */
 }
-@keyframes float{
-  from{transform:translateY(110vh)}
-  to{transform:translateY(-20vh)}
-}
-
-/* LOCK */
-.lock{
-  position:fixed;inset:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  backdrop-filter:blur(14px);
-  z-index:10;
+@keyframes float {
+  from { transform: translateY(110vh) rotateX(0deg); }
+  to { transform: translateY(-20vh) rotateX(360deg); }
 }
 
-/* LOCK CARD */
-.lock-card{
-  width:320px;
-  padding:36px 28px;
-  border-radius:28px;
-  background:rgba(255,255,255,.28);
-  backdrop-filter:blur(20px);
+/* LOCK WITH 3D DEPTH */
+.lock {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(20px);
+  z-index: 10;
+  transform-style: preserve-3d;
+}
+
+/* LOCK CARD WITH CINEMATIC 3D */
+.lock-card {
+  width: 340px;
+  padding: 40px 32px;
+  border-radius: 32px;
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(25px);
   box-shadow:
-    0 40px 80px rgba(255,0,90,.4),
-    inset 0 0 40px rgba(255,255,255,.35);
-  text-align:center;
-  animation:floatCard 6s ease-in-out infinite;
-  position:relative;
+    0 50px 100px rgba(255, 0, 90, 0.5),
+    inset 0 0 50px rgba(255, 255, 255, 0.4),
+    0 0 0 1px rgba(255, 80, 120, 0.2);
+  text-align: center;
+  animation: floatCard 8s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+  position: relative;
+  transform-style: preserve-3d;
+  transform: rotateX(5deg) rotateY(-5deg); /* Subtle 3D tilt */
 }
-@keyframes floatCard{
-  50%{transform:translateY(-10px)}
+@keyframes floatCard {
+  0%, 100% { transform: rotateX(5deg) rotateY(-5deg) translateY(0); }
+  50% { transform: rotateX(5deg) rotateY(-5deg) translateY(-15px); }
 }
 
-/* FACEID */
-.faceid{
-  width:90px;height:90px;
-  margin:0 auto 14px;
-  border-radius:20px;
-  border:2px solid rgba(255,80,120,.6);
-  position:relative;
+/* FACEID WITH 3D SCAN */
+.faceid {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 16px;
+  border-radius: 24px;
+  border: 3px solid rgba(255, 80, 120, 0.7);
+  position: relative;
+  transform-style: preserve-3d;
 }
-.faceid::before{
-  content:"";
-  position:absolute;inset:6px;
-  border-radius:14px;
-  border:2px dashed rgba(255,80,120,.6);
-  animation:scan 2s infinite;
+.faceid::before {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border-radius: 16px;
+  border: 3px dashed rgba(255, 80, 120, 0.7);
+  animation: scan 2.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
 }
-@keyframes scan{50%{transform:scale(1.08)}}
+@keyframes scan {
+  0%, 100% { transform: scale(1) rotateX(0deg); }
+  50% { transform: scale(1.1) rotateX(180deg); }
+}
 
-/* HEART */
-.lock-heart{
-  font-size:46px;
-  margin:12px 0;
-  animation:pulse 1.2s infinite;
-  filter:drop-shadow(0 0 16px #ff4d6d);
+/* HEART WITH ROMANTIC PULSE */
+.lock-heart {
+  font-size: 50px;
+  margin: 16px 0;
+  animation: pulse 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+  filter: drop-shadow(0 0 20px #ff4d6d) drop-shadow(0 0 40px #ff2f6e);
+  transform-style: preserve-3d;
 }
-@keyframes pulse{50%{transform:scale(1.25)}}
+@keyframes pulse {
+  0%, 100% { transform: scale(1) rotateY(0deg); }
+  50% { transform: scale(1.3) rotateY(180deg); }
+}
 
-/* INPUT */
-.input-wrap{position:relative}
-input{
-  width:100%;
-  padding:14px;
-  border-radius:16px;
-  border:none;
-  outline:none;
-  font-size:20px;
-  text-align:center;
-  background:rgba(255,255,255,.65);
-  box-shadow:inset 0 0 14px rgba(255,0,90,.35);
+/* INPUT WITH RIPPLE */
+.input-wrap {
+  position: relative;
 }
-.ripple{
-  position:absolute;
-  border-radius:50%;
-  background:rgba(255,80,120,.4);
-  transform:scale(0);
-  animation:ripple .6s linear;
+input {
+  width: 100%;
+  padding: 16px;
+  border-radius: 20px;
+  border: none;
+  outline: none;
+  font-size: 22px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: inset 0 0 20px rgba(255, 0, 90, 0.4);
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
-@keyframes ripple{to{transform:scale(6);opacity:0}}
+input:focus {
+  transform: scale(1.05);
+  box-shadow: inset 0 0 30px rgba(255, 0, 90, 0.6);
+}
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 80, 120, 0.5);
+  transform: scale(0);
+  animation: ripple 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+@keyframes ripple {
+  to { transform: scale(8); opacity: 0; }
+}
 
-/* BUTTON */
-button{
-  margin-top:18px;
-  width:100%;
-  padding:14px;
-  border:none;
-  border-radius:18px;
-  background:linear-gradient(135deg,#ff5c8a,#ff2f6e);
-  color:white;
-  font-size:16px;
-  cursor:pointer;
-  box-shadow:0 12px 30px rgba(255,0,80,.6);
+/* BUTTON WITH 3D PRESS */
+button {
+  margin-top: 20px;
+  width: 100%;
+  padding: 16px;
+  border: none;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #ff5c8a, #ff2f6e);
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow: 0 15px 35px rgba(255, 0, 80, 0.7);
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform-style: preserve-3d;
+}
+button:hover {
+  transform: translateY(-5px) rotateX(10deg);
+  box-shadow: 0 20px 40px rgba(255, 0, 80, 0.8);
+}
+button:active {
+  transform: translateY(0) rotateX(0deg);
 }
 
 /* LOADING */
-.loading{display:none;margin-top:12px;color:#ff2f6e}
-
-/* DISSOLVE */
-.particle{
-  position:fixed;
-  width:8px;height:8px;
-  background:radial-gradient(circle,#fff,#ff8fab);
-  border-radius:50%;
-  animation:dissolve 1.6s forwards;
-}
-@keyframes dissolve{
-  to{transform:translate(var(--x),var(--y)) scale(.3);opacity:0}
+.loading {
+  display: none;
+  margin-top: 16px;
+  color: #ff2f6e;
+  font-weight: bold;
 }
 
-/* ===== NEW PARTS ===== */
-
-/* ZOOM CINEMATIC */
-.zoom{
-  animation:zoom 3s ease-in-out forwards;
+/* DISSOLVE PARTICLES WITH 3D */
+.particle {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  background: radial-gradient(circle, #fff, #ff8fab);
+  border-radius: 50%;
+  animation: dissolve 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  transform-style: preserve-3d;
 }
-@keyframes zoom{
-  to{transform:scale(1.08)}
-}
-
-/* HEART BREAK */
-#heartStage{
-  position:fixed;inset:0;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  z-index:5;
-}
-.big-heart{
-  font-size:140px;
-  animation:beatBig 1s ease-in-out 3;
-  filter:drop-shadow(0 0 30px #ff4d6d);
-}
-@keyframes beatBig{
-  50%{transform:scale(1.35)}
-}
-.heart-mini{
-  position:fixed;
-  font-size:20px;
-  animation:flyUp 3s ease-out forwards;
-}
-@keyframes flyUp{
-  to{transform:translate(var(--x),var(--y));opacity:0}
+@keyframes dissolve {
+  to { transform: translate3d(var(--x), var(--y), var(--z)) scale(0.2) rotateX(360deg); opacity: 0; }
 }
 
-/* FIREWORK */
-canvas{position:fixed;inset:0;z-index:1}
+/* ===== NEW CINEMATIC PARTS ===== */
 
-/* TYPING */
-#typing{
-  position:fixed;
-  bottom:80px;
-  width:100%;
-  text-align:center;
-  font-size:22px;
-  color:white;
-  text-shadow:0 0 12px #fff,0 0 24px #ff4d6d;
-  display:none;
+/* ZOOM CINEMATIC WITH PAN */
+.zoom {
+  animation: zoom 4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+@keyframes zoom {
+  to { transform: scale(1.1) translateX(-10px) translateY(-10px) rotateX(2deg); }
 }
 
-/* GIFT */
-#gift{
-  position:fixed;
-  bottom:40px;
-  left:50%;
-  transform:translateX(-50%);
-  font-size:60px;
-  display:none;
+/* HEART STAGE WITH 3D DEPTH */
+#heartStage {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  transform-style: preserve-3d;
+}
+.big-heart {
+  font-size: 160px;
+  animation: beatBig 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 4;
+  filter: drop-shadow(0 0 40px #ff4d6d) drop-shadow(0 0 80px #ff2f6e);
+  transform-style: preserve-3d;
+}
+@keyframes beatBig {
+  0%, 100% { transform: scale(1) rotateY(0deg); }
+  50% { transform: scale(1.4) rotateY(180deg); }
+}
+.heart-mini {
+  position: fixed;
+  font-size: 24px;
+  animation: flyUp 4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  transform-style: preserve-3d;
+}
+@keyframes flyUp {
+  to { transform: translate3d(var(--x), var(--y), var(--z)) rotateX(360deg) rotateY(360deg); opacity: 0; }
+}
+
+/* FIREWORK WITH DEPTH */
+canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+}
+
+/* TYPING ROMANTIC TEXT */
+#typing {
+  position: fixed;
+  bottom: 100px;
+  width: 100%;
+  text-align: center;
+  font-size: 26px;
+  color: white;
+  text-shadow: 0 0 15px #fff, 0 0 30px #ff4d6d;
+  display: none;
+  transform-style: preserve-3d;
+}
+
+/* GIFT WITH 3D BOUNCE */
+#gift {
+  position: fixed;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 70px;
+  display: none;
+  animation: bounce 2s infinite;
+  transform-style: preserve-3d;
+}
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0) rotateY(0deg); }
+  50% { transform: translateX(-50%) translateY(-10px) rotateY(180deg); }
 }
 </style>
 </head>
@@ -200,11 +267,11 @@ canvas{position:fixed;inset:0;z-index:1}
 
 <!-- BACKGROUND -->
 <script>
-for(let i=0;i<20;i++){
-  const l=document.createElement("div");
-  l.className="light";
-  l.style.left=Math.random()*100+"%";
-  l.style.animationDelay=Math.random()*6+"s";
+for (let i = 0; i < 25; i++) {
+  const l = document.createElement("div");
+  l.className = "light";
+  l.style.left = Math.random() * 100 + "%";
+  l.style.animationDelay = Math.random() * 8 + "s";
   document.body.appendChild(l);
 }
 </script>
@@ -227,81 +294,85 @@ for(let i=0;i<20;i++){
   <div class="big-heart">💖</div>
 </div>
 
-<div id="typing">...</div>
+<div id="typing">Em là tình yêu của anh, mãi mãi...</div>
 <div id="gift">🎁</div>
 
 <script>
-/* RIPPLE */
-input.addEventListener("click",e=>{
-  const r=document.createElement("span");
-  r.className="ripple";
-  r.style.left=e.offsetX+"px";
-  r.style.top=e.offsetY+"px";
+/* RIPPLE ON INPUT */
+const input = document.getElementById("pass");
+input.addEventListener("click", e => {
+  const r = document.createElement("span");
+  r.className = "ripple";
+  r.style.left = e.offsetX + "px";
+  r.style.top = e.offsetY + "px";
   input.parentElement.appendChild(r);
-  setTimeout(()=>r.remove(),600);
+  setTimeout(() => r.remove(), 800);
 });
 
-/* FIREWORK */
-const c=document.getElementById("fire"),ctx=c.getContext("2d");
-function resize(){c.width=innerWidth;c.height=innerHeight}
-resize();onresize=resize;
-let ps=[];
-function boom(x,y){
-  for(let i=0;i<60;i++){
-    ps.push({x,y,vx:(Math.random()-.5)*5,vy:(Math.random()-.5)*5,l:80});
+/* FIREWORK WITH DEPTH */
+const c = document.getElementById("fire"), ctx = c.getContext("2d");
+function resize() { c.width = innerWidth; c.height = innerHeight; }
+resize(); onresize = resize;
+let ps = [];
+function boom(x, y) {
+  for (let i = 0; i < 80; i++) {
+    ps.push({ x, y, vx: (Math.random() - 0.5) * 6, vy: (Math.random() - 0.5) * 6, l: 100, z: Math.random() * 50 });
   }
 }
-(function draw(){
-  ctx.clearRect(0,0,c.width,c.height);
-  for(let i=ps.length-1;i>=0;i--){
-    const p=ps[i];
-    p.x+=p.vx;p.y+=p.vy;p.l--;
-    ctx.fillStyle=`rgba(255,80,120,${p.l/80})`;
-    ctx.beginPath();ctx.arc(p.x,p.y,3,0,Math.PI*2);ctx.fill();
-    if(p.l<=0)ps.splice(i,1);
+(function draw() {
+  ctx.clearRect(0, 0, c.width, c.height);
+  for (let i = ps.length - 1; i >= 0; i--) {
+    const p = ps[i];
+    p.x += p.vx; p.y += p.vy; p.l--;
+    const scale = 1 + p.z / 100; // Depth scaling
+    ctx.fillStyle = `rgba(255,80,120,${p.l / 100})`;
+    ctx.beginPath(); ctx.arc(p.x, p.y, 4 * scale, 0, Math.PI * 2); ctx.fill();
+    if (p.l <= 0) ps.splice(i, 1);
   }
   requestAnimationFrame(draw);
 })();
 
-/* UNLOCK FLOW */
-function unlock(){
-  if(pass.value==="0502"){
-    loading.style.display="block";
-    setTimeout(()=>{
-      lock.style.opacity=0;
-      for(let i=0;i<60;i++){
-        const p=document.createElement("div");
-        p.className="particle";
-        p.style.left="50%";
-        p.style.top="50%";
-        p.style.setProperty("--x",(Math.random()-.5)*400+"px");
-        p.style.setProperty("--y",(Math.random()-.5)*400+"px");
+/* UNLOCK FLOW WITH CINEMATIC EFFECTS */
+function unlock() {
+  if (pass.value === "0502") {
+    loading.style.display = "block";
+    setTimeout(() => {
+      lock.style.opacity = 0;
+      for (let i = 0; i < 80; i++) {
+        const p = document.createElement("div");
+        p.className = "particle";
+        p.style.left = "50%";
+        p.style.top = "50%";
+        p.style.setProperty("--x", (Math.random() - 0.5) * 500 + "px");
+        p.style.setProperty("--y", (Math.random() - 0.5) * 500 + "px");
+        p.style.setProperty("--z", (Math.random() - 0.5) * 200 + "px");
         document.body.appendChild(p);
-        setTimeout(()=>p.remove(),1600);
+        setTimeout(() => p.remove(), 2000);
       }
-      setTimeout(()=>{
+      setTimeout(() => {
         lock.remove();
         document.body.classList.add("zoom");
-        heartStage.style.display="flex";
+        heartStage.style.display = "flex";
 
-        setTimeout(()=>{
-          for(let i=0;i<30;i++){
-            const h=document.createElement("div");
-            h.className="heart-mini";
-            h.textContent="💖";
-            h.style.left="50%";
-            h.style.top="50%";
-            h.style.setProperty("--x",(Math.random()-.5)*300+"px");
-            h.style.setProperty("--y",-200-Math.random()*200+"px");
+        setTimeout(() => {
+          for (let i = 0; i < 40; i++) {
+            const h = document.createElement("div");
+            h.className = "heart-mini";
+            h.textContent = "💖";
+            h.style.left = "50%";
+            h.style.top = "50%";
+            h.style.setProperty("--x", (Math.random() - 0.5) * 400 + "px");
+            h.style.setProperty("--y", -250 - Math.random() * 250 + "px");
+            h.style.setProperty("--z", (Math.random() - 0.5) * 100 + "px");
             document.body.appendChild(h);
-            setTimeout(()=>h.remove(),3000);
+            setTimeout(() => h.remove(), 4000);
           }
-          boom(innerWidth/2,innerHeight/3);
-          typing.style.display="block";
-          gift.style.display="block";
-        },3000);
-      },800);
-    },1200);
+          boom(innerWidth / 2, innerHeight / 3);
+          typing.style.display = "block";
+          gift.style.display = "block";
+        }, 3500);
+      }, 1000);
+    }, 1500);
   }
 }
 </script>
