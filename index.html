@@ -2,409 +2,235 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>💘 Valentine Romantic Cinema 💘</title>
+<title>💘 Valentine Cinematic 💘</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-/* ===== BASE (MODERNIZED) ===== */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Segoe UI', sans-serif;
-}
-body {
-  height: 100vh;
-  background: radial-gradient(circle at top, #ffe6ec, #ff9bb3);
-  overflow: hidden;
-  perspective: 1000px; /* 3D perspective for cinematic feel */
-  transform-style: preserve-3d;
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
+body{
+  height:100vh;
+  overflow:hidden;
+  background:radial-gradient(circle at top,#ffd6e0,#ff8fb1);
+  perspective:1200px;
 }
 
-/* BACKGROUND LIGHTS WITH 3D GLOW */
-.light {
-  position: fixed;
-  width: 8px;
-  height: 8px;
-  background: radial-gradient(circle, #fff, transparent);
-  animation: float 8s linear infinite;
-  opacity: 0.8;
-  box-shadow: 0 0 20px rgba(255, 80, 120, 0.6); /* Volumetric glow */
-  transform: translateZ(0); /* Force hardware acceleration */
+/* ===== CINEMATIC BREATHING BACKGROUND ===== */
+.bg-breath{
+  position:fixed;
+  inset:-20%;
+  background:radial-gradient(circle at center,#ffb3c7,transparent 60%);
+  animation:breath 18s ease-in-out infinite;
+  opacity:.35;
+  z-index:0;
 }
-@keyframes float {
-  from { transform: translateY(110vh) rotateX(0deg); }
-  to { transform: translateY(-20vh) rotateX(360deg); }
+@keyframes breath{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.15)}
 }
 
-/* LOCK WITH 3D DEPTH */
-.lock {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  backdrop-filter: blur(20px);
-  z-index: 10;
-  transform-style: preserve-3d;
+/* ===== BIG OUTLINE HEART ===== */
+.big-outline-heart{
+  position:fixed;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:520px;
+  color:transparent;
+  -webkit-text-stroke:2px rgba(255,255,255,.08);
+  filter:blur(2px);
+  animation:heartPulse 8s ease-in-out infinite;
+  z-index:1;
+}
+@keyframes heartPulse{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.08)}
 }
 
-/* LOCK CARD WITH CINEMATIC 3D */
-.lock-card {
-  width: 340px;
-  padding: 40px 32px;
-  border-radius: 32px;
-  background: rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(25px);
-  box-shadow:
-    0 50px 100px rgba(255, 0, 90, 0.5),
-    inset 0 0 50px rgba(255, 255, 255, 0.4),
-    0 0 0 1px rgba(255, 80, 120, 0.2);
-  text-align: center;
-  animation: floatCard 8s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
-  position: relative;
-  transform-style: preserve-3d;
-  transform: rotateX(5deg) rotateY(-5deg); /* Subtle 3D tilt */
+/* ===== DUST PARTICLES ===== */
+.dust span{
+  position:fixed;
+  width:3px;
+  height:3px;
+  background:white;
+  border-radius:50%;
+  opacity:.25;
+  filter:blur(1px);
+  animation:dustFloat linear infinite;
 }
-@keyframes floatCard {
-  0%, 100% { transform: rotateX(5deg) rotateY(-5deg) translateY(0); }
-  50% { transform: rotateX(5deg) rotateY(-5deg) translateY(-15px); }
+@keyframes dustFloat{
+  from{transform:translateY(110vh)}
+  to{transform:translateY(-20vh)}
 }
 
-/* SHAKE ANIMATION FOR WRONG PASSWORD */
-.shake {
-  animation: shake 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+/* ===== ORBIT HEARTS ===== */
+.orbit{
+  position:fixed;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  pointer-events:none;
+  z-index:3;
 }
-@keyframes shake {
-  0%, 100% { transform: rotateX(5deg) rotateY(-5deg) translateX(0); }
-  25% { transform: rotateX(5deg) rotateY(-5deg) translateX(-10px); }
-  75% { transform: rotateX(5deg) rotateY(-5deg) translateX(10px); }
+.orbit span{
+  position:absolute;
+  font-size:16px;
+  opacity:.6;
+  animation:orbit 24s linear infinite;
 }
-
-/* FACEID WITH 3D SCAN */
-.faceid {
-  width: 100px;
-  height: 100px;
-  margin: 0 auto 16px;
-  border-radius: 24px;
-  border: 3px solid rgba(255, 80, 120, 0.7);
-  position: relative;
-  transform-style: preserve-3d;
-}
-.faceid::before {
-  content: "";
-  position: absolute;
-  inset: 8px;
-  border-radius: 16px;
-  border: 3px dashed rgba(255, 80, 120, 0.7);
-  animation: scan 2.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
-}
-@keyframes scan {
-  0%, 100% { transform: scale(1) rotateX(0deg); }
-  50% { transform: scale(1.1) rotateX(180deg); }
+@keyframes orbit{
+  from{transform:rotate(0deg) translateX(160px) rotate(0deg)}
+  to{transform:rotate(360deg) translateX(160px) rotate(-360deg)}
 }
 
-/* HEART WITH ROMANTIC PULSE */
-.lock-heart {
-  font-size: 50px;
-  margin: 16px 0;
-  animation: pulse 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
-  filter: drop-shadow(0 0 20px #ff4d6d) drop-shadow(0 0 40px #ff2f6e);
-  transform-style: preserve-3d;
-}
-@keyframes pulse {
-  0%, 100% { transform: scale(1) rotateY(0deg); }
-  50% { transform: scale(1.3) rotateY(180deg); }
-}
-
-/* INPUT WITH RIPPLE */
-.input-wrap {
-  position: relative;
-}
-input {
-  width: 100%;
-  padding: 16px;
-  border-radius: 20px;
-  border: none;
-  outline: none;
-  font-size: 22px;
-  text-align: center;
-  background: rgba(255, 255, 255, 0.7);
-  box-shadow: inset 0 0 20px rgba(255, 0, 90, 0.4);
-  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-input:focus {
-  transform: scale(1.05);
-  box-shadow: inset 0 0 30px rgba(255, 0, 90, 0.6);
-}
-.ripple {
-  position: absolute;
-  border-radius: 50%;
-  background: rgba(255, 80, 120, 0.5);
-  transform: scale(0);
-  animation: ripple 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-@keyframes ripple {
-  to { transform: scale(8); opacity: 0; }
+/* ===== VIGNETTE + FILM NOISE ===== */
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle,transparent 45%,rgba(0,0,0,.22)),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events:none;
+  z-index:20;
 }
 
-/* ERROR MESSAGE */
-#error {
-  display: none;
-  margin-top: 12px;
-  color: #ff4d6d;
-  font-size: 16px;
-  font-weight: bold;
-  text-shadow: 0 0 10px rgba(255, 77, 109, 0.8);
+/* ===== HEADER ===== */
+header{
+  position:fixed;
+  top:18px;
+  width:100%;
+  text-align:center;
+  color:white;
+  text-shadow:0 0 15px #ff4d6d;
+  z-index:10;
 }
 
-/* BUTTON WITH 3D PRESS */
-button {
-  margin-top: 20px;
-  width: 100%;
-  padding: 16px;
-  border: none;
-  border-radius: 20px;
-  background: linear-gradient(135deg, #ff5c8a, #ff2f6e);
-  color: white;
-  font-size: 18px;
-  cursor: pointer;
-  box-shadow: 0 15px 35px rgba(255, 0, 80, 0.7);
-  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  transform-style: preserve-3d;
+/* ===== LOCK CARD ===== */
+.lock{
+  position:fixed;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:10;
 }
-button:hover {
-  transform: translateY(-5px) rotateX(10deg);
-  box-shadow: 0 20px 40px rgba(255, 0, 80, 0.8);
+.lock-card{
+  width:320px;
+  padding:34px;
+  border-radius:30px;
+  background:rgba(255,255,255,.4);
+  backdrop-filter:blur(30px);
+  box-shadow:0 40px 90px rgba(255,0,90,.5);
+  text-align:center;
+  transform-style:preserve-3d;
+  transition:.2s;
 }
-button:active {
-  transform: translateY(0) rotateX(0deg);
+.lock-heart{
+  font-size:56px;
+  margin-bottom:16px;
+  animation:pulse 1.2s infinite;
+  filter:drop-shadow(0 0 25px #ff4d6d);
 }
-
-/* LOADING */
-.loading {
-  display: none;
-  margin-top: 16px;
-  color: #ff2f6e;
-  font-weight: bold;
+@keyframes pulse{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.3)}
 }
-
-/* DISSOLVE PARTICLES WITH 3D */
-.particle {
-  position: fixed;
-  width: 10px;
-  height: 10px;
-  background: radial-gradient(circle, #fff, #ff8fab);
-  border-radius: 50%;
-  animation: dissolve 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-  transform-style: preserve-3d;
+input{
+  width:100%;
+  padding:16px;
+  border-radius:18px;
+  border:none;
+  outline:none;
+  text-align:center;
+  font-size:20px;
+  box-shadow:inset 0 0 25px rgba(255,0,90,.4);
 }
-@keyframes dissolve {
-  to { transform: translate3d(var(--x), var(--y), var(--z)) scale(0.2) rotateX(360deg); opacity: 0; }
-}
-
-/* ===== NEW CINEMATIC PARTS ===== */
-
-/* ZOOM CINEMATIC WITH PAN */
-.zoom {
-  animation: zoom 4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-}
-@keyframes zoom {
-  to { transform: scale(1.1) translateX(-10px) translateY(-10px) rotateX(2deg); }
+button{
+  margin-top:18px;
+  width:100%;
+  padding:16px;
+  border:none;
+  border-radius:20px;
+  background:linear-gradient(135deg,#ff5c8a,#ff2f6e);
+  color:white;
+  font-size:18px;
+  cursor:pointer;
+  box-shadow:0 15px 35px rgba(255,0,80,.7);
 }
 
-/* HEART STAGE WITH 3D DEPTH */
-#heartStage {
-  position: fixed;
-  inset: 0;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 5;
-  transform-style: preserve-3d;
-}
-.big-heart {
-  font-size: 160px;
-  animation: beatBig 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 4;
-  filter: drop-shadow(0 0 40px #ff4d6d) drop-shadow(0 0 80px #ff2f6e);
-  transform-style: preserve-3d;
-}
-@keyframes beatBig {
-  0%, 100% { transform: scale(1) rotateY(0deg); }
-  50% { transform: scale(1.4) rotateY(180deg); }
-}
-.heart-mini {
-  position: fixed;
-  font-size: 24px;
-  animation: flyUp 4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-  transform-style: preserve-3d;
-}
-@keyframes flyUp {
-  to { transform: translate3d(var(--x), var(--y), var(--z)) rotateX(360deg) rotateY(360deg); opacity: 0; }
-}
-
-/* FIREWORK WITH DEPTH */
-canvas {
-  position: fixed;
-  inset: 0;
-  z-index: 1;
-}
-
-/* TYPING ROMANTIC TEXT */
-#typing {
-  position: fixed;
-  bottom: 100px;
-  width: 100%;
-  text-align: center;
-  font-size: 26px;
-  color: white;
-  text-shadow: 0 0 15px #fff, 0 0 30px #ff4d6d;
-  display: none;
-  transform-style: preserve-3d;
-}
-
-/* GIFT WITH 3D BOUNCE */
-#gift {
-  position: fixed;
-  bottom: 50px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 70px;
-  display: none;
-  animation: bounce 2s infinite;
-  transform-style: preserve-3d;
-}
-@keyframes bounce {
-  0%, 100% { transform: translateX(-50%) translateY(0) rotateY(0deg); }
-  50% { transform: translateX(-50%) translateY(-10px) rotateY(180deg); }
+/* ===== MOMENT TEXT ===== */
+#moment{
+  position:fixed;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  font-size:28px;
+  color:white;
+  text-shadow:0 0 30px #ff4d6d;
+  z-index:30;
 }
 </style>
 </head>
 
 <body>
 
-<canvas id="fire"></canvas>
+<header>💖 Happy Valentine Bé iu 💖</header>
 
-<!-- BACKGROUND -->
-<script>
-for (let i = 0; i < 25; i++) {
-  const l = document.createElement("div");
-  l.className = "light";
-  l.style.left = Math.random() * 100 + "%";
-  l.style.animationDelay = Math.random() * 8 + "s";
-  document.body.appendChild(l);
-}
-</script>
+<div class="bg-breath"></div>
+<div class="big-outline-heart">💗</div>
 
-<!-- LOCK -->
+<div class="dust"></div>
+
+<div class="orbit">
+  <span>💖</span>
+  <span style="animation-delay:-12s">💖</span>
+</div>
+
 <div class="lock" id="lock">
-  <div class="lock-card" id="lockCard">
-    <div class="faceid"></div>
+  <div class="lock-card" id="card">
     <div class="lock-heart">💖</div>
-    <div class="input-wrap">
-      <input type="password" id="pass" placeholder="••••">
-    </div>
-    <div id="error"></div>
+    <input id="pass" type="password" placeholder="Nhập mật khẩu">
     <button onclick="unlock()">Mở khóa 💝</button>
-    <div class="loading" id="loading">Đang mở khóa…</div>
   </div>
 </div>
 
-<!-- HEART STAGE -->
-<div id="heartStage">
-  <div class="big-heart">💖</div>
-</div>
-
-<div id="typing">Ngày 14/02 là ngày chúng ta gặp nhau, em là tình yêu vĩnh cửu của anh, mãi mãi bên nhau... 💕</div>
-<div id="gift">🎁</div>
+<div id="moment">Khoảnh khắc này chỉ mở cho một người 💗</div>
 
 <script>
-/* RIPPLE ON INPUT */
-const input = document.getElementById("pass");
-input.addEventListener("click", e => {
-  const r = document.createElement("span");
-  r.className = "ripple";
-  r.style.left = e.offsetX + "px";
-  r.style.top = e.offsetY + "px";
-  input.parentElement.appendChild(r);
-  setTimeout(() => r.remove(), 800);
+/* ===== PARALLAX CARD ===== */
+document.addEventListener("mousemove",e=>{
+  const x=(e.clientX/innerWidth-.5)*10;
+  const y=(e.clientY/innerHeight-.5)*10;
+  card.style.transform=`rotateY(${x}deg) rotateX(${-y}deg)`;
 });
 
-/* FIREWORK WITH DEPTH */
-const c = document.getElementById("fire"), ctx = c.getContext("2d");
-function resize() { c.width = innerWidth; c.height = innerHeight; }
-resize(); onresize = resize;
-let ps = [];
-function boom(x, y) {
-  for (let i = 0; i < 80; i++) {
-    ps.push({ x, y, vx: (Math.random() - 0.5) * 6, vy: (Math.random() - 0.5) * 6, l: 100, z: Math.random() * 50 });
+/* ===== DUST GENERATION ===== */
+const dust=document.querySelector(".dust");
+for(let i=0;i<40;i++){
+  const s=document.createElement("span");
+  s.style.left=Math.random()*100+"%";
+  s.style.animationDuration=15+Math.random()*25+"s";
+  s.style.animationDelay=Math.random()*20+"s";
+  dust.appendChild(s);
+}
+
+/* ===== UNLOCK ===== */
+function unlock(){
+  if(pass.value==="1402"){
+    lock.style.opacity=0;
+    setTimeout(()=>{
+      lock.remove();
+      moment.style.display="flex";
+    },600);
+  }else{
+    card.style.animation="shake .4s";
+    setTimeout(()=>card.style.animation="",400);
   }
 }
-(function draw() {
-  ctx.clearRect(0, 0, c.width, c.height);
-  for (let i = ps.length - 1; i >= 0; i--) {
-    const p = ps[i];
-    p.x += p.vx; p.y += p.vy; p.l--;
-    const scale = 1 + p.z / 100; // Depth scaling
-    ctx.fillStyle = `rgba(255,80,120,${p.l / 100})`;
-    ctx.beginPath(); ctx.arc(p.x, p.y, 4 * scale, 0, Math.PI * 2); ctx.fill();
-    if (p.l <= 0) ps.splice(i, 1);
-  }
-  requestAnimationFrame(draw);
-})();
+</script>
 
-/* UNLOCK FLOW WITH CINEMATIC EFFECTS */
-function unlock() {
-  const errorDiv = document.getElementById("error");
-  const lockCard = document.getElementById("lockCard");
-  if (pass.value === "1402") {
-    loading.style.display = "block";
-    setTimeout(() => {
-      lock.style.opacity = 0;
-      for (let i = 0; i < 80; i++) {
-        const p = document.createElement("div");
-        p.className = "particle";
-        p.style.left = "50%";
-        p.style.top = "50%";
-        p.style.setProperty("--x", (Math.random() - 0.5) * 500 + "px");
-        p.style.setProperty("--y", (Math.random() - 0.5) * 500 + "px");
-        p.style.setProperty("--z", (Math.random() - 0.5) * 200 + "px");
-        document.body.appendChild(p);
-        setTimeout(() => p.remove(), 2000);
-      }
-      setTimeout(() => {
-        lock.remove();
-        document.body.classList.add("zoom");
-        heartStage.style.display = "flex";
-
-        setTimeout(() => {
-          for (let i = 0; i < 40; i++) {
-            const h = document.createElement("div");
-            h.className = "heart-mini";
-            h.textContent = "💖";
-            h.style.left = "50%";
-            h.style.top = "50%";
-            h.style.setProperty("--x", (Math.random() - 0.5) * 400 + "px");
-            h.style.setProperty("--y", -250 - Math.random() * 250 + "px");
-            h.style.setProperty("--z", (Math.random() - 0.5) * 100 + "px");
-            document.body.appendChild(h);
-            setTimeout(() => h.remove(), 4000);
-          }
-          boom(innerWidth / 2, innerHeight / 3);
-          typing.style.display = "block";
-          gift.style.display = "block";
-        }, 3500);
-      }, 1000);
-    }, 1500);
-  } else {
-    // Wrong password: shake and show error
-    lockCard.classList.add("shake");
-    errorDiv.textContent = "Sai rồi, hãy thử lại với ngày đặc biệt của chúng ta... 💔";
-    errorDiv.style.display = "block";
-    setTimeout(() => {
-      lockCard.classList.remove("shake");
-      errorDiv.style.display = "none";
-    }, 3000);
-  }
-}
-</
+</body>
+</html>
